@@ -54,8 +54,6 @@ class Inicio extends CI_Controller {
 		$hi = $this->db->order_by('id',"desc")->limit(1)->get('tiempo')->row('h_inicio');
 		$hf = $this->db->order_by('id',"desc")->limit(1)->get('tiempo')->row('h_fin');
 
-		
-
 		$dia = $_POST['fecha'];
 		$data['tiempo'] = $this->Mi_model->get_dato($id);
 		$a = $_POST['t1'];
@@ -64,21 +62,17 @@ class Inicio extends CI_Controller {
 		$dato=$a.':'.$b.':'.$c;
 		$hoy = getdate();
 		$hora=$hoy['hours'].':'.$hoy['minutes'].':'.$hoy['seconds'];
-		 
-  		   
-				$datos = array(
-					'nombre' => $this->input->post('nombre'),
-					'hora'=>$dato,
-					'dia' => $this->input->post('fecha'),
-					'h_inicio' => $this->input->post('hrs_i'),
-					'h_fin' => $hora
-				);
-			 
-			$this->Mi_model->update_dato($id,$datos);
-			redirect('Inicio/inicio');
-		 
+
+		$datos = array(
+			'nombre' => $this->input->post('nombre'),
+			'hora'=>$dato,
+			'dia' => $this->input->post('fecha'),
+			'h_inicio' => $this->input->post('hrs_i'),
+			'h_fin' => $hora
+		);
 			
-	 	  
+			$this->Mi_model->guarda_dato($datos);
+			redirect('Inicio/inicio');  
 	}
 
 	public function valida(){
