@@ -1,21 +1,19 @@
-<script>
-  var intervalo ={};
-  var i;
-</script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
 
 <body>
+  <br>  
   <center>
-    <h1>Cuerpo</h1>
+   
 
-    <div class="container">
-      <table class="table">
-        <thead class="thead-dark">
+    <div class="container" style="width: 50%;">
+      <table class="table table-hover ">
+      
+        <thead class="thead bg-success text-white rounded">
+        
           <tr>
-            <th scope="col " class="text-center"><h4>U s u a r i o s</h4></th>
-            <th scope="col " class="text-center col-2"><h4> </h4></th>
-            <th scope="col " class="text-center col-2"><h4> </h4></th>
+          
+            <th scope="col " colspan="3"class="text-center"><H3>Residentes</H3></th>
+             
             <th></th>
           </tr>
         </thead>
@@ -27,22 +25,23 @@
         $domain = substr($u, 0,strpos($u,' '));
         
 
-        echo("<tr>");
-        echo("<td>");
+        echo("<tr data-target='#i".$domain."'>");
+        echo("<td >");
           echo $u;
           ?>
-        <br><input class="text-center" id="horas2<?php echo($domain)?>" type="text" value="0 " name="t1" readonly style="width: 35px" />
+          
+        <br><input class="text-center border-0 text-muted" id="horas2<?php echo($domain)?>" type="text" value="0 " name="t1" readonly style="width: 35px" />
               :
-              <input class="text-center" id="minutos2<?php echo($domain)?>" type="text" value="0 " name="t2" readonly style="width: 35px" />
+              <input class="text-center border-0 text-muted" id="minutos2<?php echo($domain)?>" type="text" value="0 " name="t2" readonly style="width: 35px" />
               :
-              <input class="text-center" id="segundos2<?php echo($domain)?>" type="text" value="0 " name="t3" readonly
+              <input class="text-center border-0 text-muted" id="segundos2<?php echo($domain)?>" type="text" value="0 " name="t3" readonly
                 style="width: 35px" />
         <?php
         echo("</td>");
         
-        echo("<td>");
+        echo("<td colspan='2'>");
            
-          echo("<button ' type='button' id='play".$domain."' class='btn btn-primary' data-toggle='modal' data-target='#".$domain."'> play</button>"); 
+          echo("<button ' type='button' id='play".$domain."' class='btn btn-success float-right' data-toggle='modal' data-target='#".$domain."'> play</button>"); 
           
         ?>  
          
@@ -67,9 +66,9 @@
               <input class="text-center" id="minutos<?php echo($domain)?>" type="text" value="0 " name="t2" readonly style="width: 35px" />
               :
               <input class="text-center" id="segundos<?php echo($domain)?>" type="text" value="0 " name="t3" readonly
-                style="width: 35px" /><br /><br /><br /> 
-
-              <input type="button" onclick="iniciar(<?php echo($domain)?>)" value="Inicio" class="btn btn-success" />
+              style="width: 35px" /><br /><br /><br /> 
+          
+              <input type="button" onclick= "iniciar(<?php echo($domain)?> )" value="Inicio" class="btn btn-success" />
               <input type="button" onclick="detenerse(<?php echo($domain)?>)" value="Pausa" class="btn btn-primary"/>
               <input type="submit" value="finalizar" class="btn btn-danger"/>
 
@@ -91,7 +90,7 @@
         <?php
  echo("</td>");
  echo("<td>");
- echo("<button  type='button' id='info".$domain."' class='btn btn-info ' data-toggle='modal' data-target='#i".$domain."'> info</button>");
+  
  ?>
  <div class="modal" tabindex="-1" role="dialog" id="i<?php echo($domain)?>">
     <div class="modal-dialog" role="document">
@@ -137,85 +136,19 @@
       </table>
     </div>
   </center>
-
-
-  <br />
-  <br />
-  <br />
-  <br />
-  <br />
-  <br />
-  <br />
-  <br />
-  <br />
-  <br />
-  <br />
-
-  
- 
-
- 
-
 </body>
 
 <script type="text/javascript" >
   var f = new Date();
   
   document.getElementById("fecha").value =
-    f.getFullYear() + "-" + (f.getMonth() + 1) + "-" + f.getDate();
-  
+  f.getFullYear() + "-" + (f.getMonth() + 1) + "-" + f.getDate();
 
-  var cronometro;
-  
 
-  function detenerse(nom) {
-    nomb=nom['id'];
-    btn=document.getElementById("play"+nomb);
-    btn.innerHTML='Reanudar';
-    document.getElementById("hrs_f").value =f.getHours() + ":" + f.getMinutes() + ":" + f.getSeconds();
-    clearInterval(cronometro);
-  }
-  function btn() {
-    btn=document.getElementById("play");
-    btn.innerHTML='Play';
-    btn.className = "btn btn-primary";
-    
-  } 
 
- function iniciar(nom) {
-  contador_s = 1;
-  contador_m = 0;
-  contador_h = 0;
-    nomb=nom['id']
-    btn=document.getElementById("play"+nomb);
-    btn.innerHTML='Pausar';
-    btn.className = "btn btn-warning";
-
-    document.getElementById("hrs_i").value =f.getHours() + ":" + f.getMinutes() + ":" + f.getSeconds();
-    s = document.getElementById("segundos"+nomb);
-    m = document.getElementById("minutos"+nomb);
-    h = document.getElementById("horas"+nomb);
-
-    cronometro = setInterval(function () {
-      
-      document.getElementById("segundos"+nomb).value = eval(contador_s);
-      document.getElementById("segundos2"+nomb).value = eval(contador_s);
-      if (contador_s == 60) {
-        contador_s = 0;
-        contador_m++;
-        document.getElementById("minutos"+nomb).value = eval(contador_m);
-        document.getElementById("minutos2"+nomb).value = eval(contador_m);
-      }
-      if (contador_m == 60) {
-        contador_m = 0;
-        contador_h++;
-        document.getElementById("horas"+nomb).value = eval(contador_h);
-        document.getElementById("horas2"+nomb).value = eval(contador_h);
-      }
-      s.innerHTML = contador_s;
-      contador_s++;
-    }, 1000);  
-  }
 </script>
+
+
+ 
  
 

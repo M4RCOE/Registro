@@ -1,10 +1,18 @@
+<footer class="bg-dark text-center text-white">
  
-
-<footer class="bg-dark text-white">
-<center>
-	<br>
-<h2>Pie</h2>
- <br>
+  <div class="text-center p-3 bg-dark">
+  Hecho por Marco Eleno <br> 
+    © 2021 Copyright
+ 
+  </div>
+  
 </footer>
- 
 </html>
+<style>
+	footer {
+		position: absolute;
+		bottom: 0;
+		width: 100%;
+		height: 40px;
+	}
+</style>
