@@ -13,6 +13,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script src="<?php echo base_url('js/metodo.js');?>"></script>
+    <script src="<?php echo base_url('js/jquery.js');?>"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
    
    
    
