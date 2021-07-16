@@ -12,8 +12,12 @@ class Inicio extends CI_Controller {
 	public function index()
 	{
    
-
-		$this->load->view('login_v');
+		$this->msg =0;
+		$d['msg'] = $this->msg;
+		$users['usuarios'] = $this->Mi_model->get_user();
+		$this->load->view('cabeza');
+		$this->load->view('principal',$users);
+		$this->load->view('pie',$d);
 		 
 	}
 	var $msj;
@@ -92,7 +96,10 @@ class Inicio extends CI_Controller {
    }
    public function cierra_sesion(){
 		$this->session->sess_destroy();
-		$this->load->view('login_v');
+		redirect('/');
+}
+   public function iniciar_sesion(){
+	$this->load->view('login_v');
 }
 	 
 
