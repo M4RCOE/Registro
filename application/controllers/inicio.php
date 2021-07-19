@@ -12,73 +12,13 @@ class Inicio extends CI_Controller {
 	public function index()
 	{
    
-		$this->msg =0;
-		$d['msg'] = $this->msg;
+		 
 		$users['usuarios'] = $this->Mi_model->get_user();
 		$this->load->view('cabeza');
 		$this->load->view('principal',$users);
-		$this->load->view('pie',$d);
+		$this->load->view('pie');
 		 
 	}
-	var $msj;
-	public function inicio()
-	{
-		$this->msg =0;
-		$d['msg'] = $this->msg;
-		$users['usuarios'] = $this->Mi_model->get_user();
-		if ($this->session->userdata('user')) {
-			$this->load->view('cabeza');
-			$this->load->view('principal',$users);
-			$this->load->view('pie',$d);
-	  } else {
-			redirect('/');
-	  }  
-		
-	}
-	public function inicio2()
-	{
-		$this->msg =1;
-		$d['msg'] = $this->msg;
-		$users['usuarios'] = $this->Mi_model->get_user();
-		if ($this->session->userdata('user')) {
-			$this->load->view('cabeza');
-			$this->load->view('principal',$users);
-			$this->load->view('pie',$d);
-	  } else {
-			redirect('/');
-	  }  
-		
-	}
-
-	
-	public function guarda()
-	{
-		$this->load->database();
-		$id = $this->db->order_by('id',"desc")->limit(1)->get('tiempo')->row('id');
-		$hi = $this->db->order_by('id',"desc")->limit(1)->get('tiempo')->row('h_inicio');
-		$hf = $this->db->order_by('id',"desc")->limit(1)->get('tiempo')->row('h_fin');
-
-		$dia = $_POST['fecha'];
-		$data['tiempo'] = $this->Mi_model->get_dato($id);
-		$a = $_POST['t1'];
-		$b = $_POST['t2'];
-		$c = $_POST['t3'];
-		$dato=$a.':'.$b.':'.$c;
-		$hoy = getdate();
-		$hora=$hoy['hours'].':'.$hoy['minutes'].':'.$hoy['seconds'];
-
-		$datos = array(
-			'nombre' => $this->input->post('nombre'),
-			'hora'=>$dato,
-			'dia' => $this->input->post('fecha'),
-			'h_inicio' => $this->input->post('hrs_i'),
-			'h_fin' => $hora
-		);
-			
-			$this->Mi_model->guarda_dato($datos);
-			redirect('Inicio/inicio');  
-	}
-
 	public function valida(){
 		$nombre = $this->input->post('nombre');
 		$cve = $this->input->post('cve');

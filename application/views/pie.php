@@ -16,4 +16,4 @@
 		height: 40px;
 	}
 </style>
-<script src="<?php echo base_url('js/metodo.js');?>"></script>
+<script src="<?php echo base_url('js/grafica.js');?>"></script>
