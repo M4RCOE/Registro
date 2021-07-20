@@ -108,18 +108,19 @@ dia=function(n){
 	  data:parametros,
 	  success:  function (r) {
 		n2=n.split(' ',1)
-		 console.log(r.split(';'))
+		 console.log(r.split(','))
 		 console.log("#Chart"+n3[0])
-		 $("#Chart"+n3[0]).html(r.split(';'))
-		  
-		 
+		 $("#Chart"+n3[0]).html(r.split(','))
+		 $("#cc"+n3[0]).val(r.split(','))
+ 
 		  }
 	});
 
 clasif=function (nm){
-	st=document.getElementById('Chart'+nm).value
-	console.log(st)
-	numeroDia = new Date().getDay();
+	let st=$("#cc"+nm)
+	
+	console.log('span '+st)
+	let numeroDia = new Date().getDay();
 	console.log()
 }
 }

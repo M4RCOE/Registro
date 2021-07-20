@@ -1,6 +1,5 @@
 var charts = {};
 var ctx = {};
-
 for (chart of $('[name="chart"]')) {	
 	ctx[chart.id] = $("#" + chart.id)[0].getContext("2d");
 	charts[chart.id] = new Chart(ctx[chart.id], {

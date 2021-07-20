@@ -17,3 +17,4 @@
 	}
 </style>
 <script src="<?php echo base_url('js/grafica.js');?>"></script>
+<script src="<?php echo base_url('js/tareas.js');?>"></script>

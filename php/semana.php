@@ -6,7 +6,7 @@
     $query->execute();
     $list = $query->fetchAll();
     foreach ($list as $rs) {
-         echo($rs['hrs'].",".$rs['dia'].";");
+         echo($rs['hrs'].",".$rs['dia']);
     }
  
     
