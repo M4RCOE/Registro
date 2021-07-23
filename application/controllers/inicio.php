@@ -26,7 +26,7 @@ class Inicio extends CI_Controller {
 
 		if ( $user ){
 			$this->session->set_userdata('user',$user);
-			redirect('Inicio/inicio');
+			redirect('/');
 		   
 		} else
 		{

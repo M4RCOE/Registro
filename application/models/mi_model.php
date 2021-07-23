@@ -24,6 +24,7 @@ class Mi_model extends CI_Model {
 		$query = $this->db->get_where('usuarios', array('nombre' => $nombre, 'clave' => $cve));
 		return $query->row_array();    
 	}
+	 
 
 	public function get_user(){
 	 

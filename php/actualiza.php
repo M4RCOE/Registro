@@ -9,12 +9,10 @@ include ("conecta.php");
          
         if(empty($rs['h_fin'])){
             //echo("UPDATE tiempo SET h_fin='".$_POST['hr_f']."' WHERE id='".$rs['id']."'");
-            $sql2="UPDATE tiempo SET h_fin='".$_POST['hr_f']."' WHERE id='".$rs['id']."'";
+            $sql2="UPDATE tiempo SET h_fin='".$_POST['hr_f']."',play=0,hora='".$_POST['tiempo']."' WHERE id='".$rs['id']."'";
             $query = $pdo->prepare($sql2);
             $query->execute(); 
-            $sql3="UPDATE tiempo SET hora='".$_POST['tiempo']."' WHERE id='".$rs['id']."'";
-            $query = $pdo->prepare($sql3);
-            $query->execute(); 
+           
         }
     }
 

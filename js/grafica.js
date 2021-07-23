@@ -1,7 +1,9 @@
+
 var charts = {};
 var ctx = {};
 for (chart of $('[name="chart"]')) {	
 	ctx[chart.id] = $("#" + chart.id)[0].getContext("2d");
+
 	charts[chart.id] = new Chart(ctx[chart.id], {
 		
 		type: "bar",
@@ -10,7 +12,7 @@ for (chart of $('[name="chart"]')) {
 			datasets: [
 				{
 					label: "Horas Por semana",
-					data: [5, 0, 0, 0, 0],
+					data: dds[chart.id],
 					backgroundColor: [
 						"rgba(255, 99, 132, 0.2)",
 						"rgba(54, 162, 235, 0.2)",
