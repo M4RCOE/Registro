@@ -60,7 +60,9 @@
             <?php
             if($this->session->userdata('user')){
               ?>
-              <a class="nav-link dropdown-toggle " href="#" id="ad" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                     <div class="dropdown">
+  <button class="btn  dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style='color:white;'>
+
               <img src="<?php echo base_url('img/man.png');?>">
               <?php
             $user =$this->session->userdata('user');
@@ -68,7 +70,14 @@
             $user = substr($user, 0,strpos($user,' '));
             echo ucfirst($user);
             ?>
-             </a>
+                 
+  </button>
+  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+  <a class="dropdown-item" href="<?php echo site_url('Inicio/cierra_sesion')?>">Salir</a>
+  <a class="dropdown-item" href="<?php echo site_url('Inicio/admin')?>">Dashboard</a>
+    
+  </div>
+</div>
              <?php
             }else{
             echo("<ul class='navbar-nav mr-auto '>");
@@ -83,11 +92,9 @@
             }
              
            ?>
-          
-          <ul class="dropdown-menu dropdown-menu-right" style='width: 5px !important;' aria-labelledby="navbarDropdownMenuLink">
-            <li><a class="dropdown-item" href="<?php echo site_url('Inicio/cierra_sesion')?>">Salir</a></li>
-            
-          </ul></span>
+           
+   
+           </span>
         </li>
       </ul>
     </div>

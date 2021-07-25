@@ -106,6 +106,7 @@ horas = function (n) {
 
 dds = {};
 dia = function (n) {
+	console.log('dentro de dia '+n)
 	let para_graficaic = [0, 0, 0, 0, 0];
 	var parametros = { nomb: n };
 	$.ajax({
@@ -142,7 +143,7 @@ dia = function (n) {
 				}
 			}
 			dds["myChart" + n2] = para_graficaic;
-	 
+			console.log(n2+" "+para_graficaic)
 		},
 	});
 };

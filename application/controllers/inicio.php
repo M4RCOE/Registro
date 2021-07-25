@@ -26,7 +26,7 @@ class Inicio extends CI_Controller {
 
 		if ( $user ){
 			$this->session->set_userdata('user',$user);
-			redirect('/');
+			$this->load->view('admin');
 		   
 		} else
 		{
@@ -41,6 +41,10 @@ class Inicio extends CI_Controller {
    public function iniciar_sesion(){
 	$this->load->view('login_v');
 }
+   public function admin(){
+	$this->load->view('admin');
+}
+  
 	 
 
 }
