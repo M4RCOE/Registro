@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost:3306
--- Tiempo de generación: 13-07-2021 a las 15:51:23
+-- Tiempo de generación: 25-07-2021 a las 17:38:46
 -- Versión del servidor: 10.4.18-MariaDB
 -- Versión de PHP: 8.0.3
 
@@ -24,6 +24,31 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `tareas`
+--
+
+CREATE TABLE `tareas` (
+  `id_tarea` int(11) NOT NULL,
+  `residente` varchar(50) NOT NULL,
+  `tarea` varchar(150) NOT NULL,
+  `comentario` varchar(500) NOT NULL,
+  `estado` varchar(50) NOT NULL,
+  `fecha` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `tareas`
+--
+
+INSERT INTO `tareas` (`id_tarea`, `residente`, `tarea`, `comentario`, `estado`, `fecha`) VALUES
+(25, 'Marco Antonio Eleno Tovar', ' estoy tratando de pasar una imagen de python a html pero tengo dificultades al momento de abrir la imagen', 'buen trabajo', 'Terminada', '2021-06-01'),
+(26, 'Ricardo Baeza Candor', 'I am trying to pass an image from python to html but I am having difficulty opening the image', '', 'Activa', '2021-06-16'),
+(27, 'Marco Antonio Eleno Tovar', 'como puedo pasar una imagen de python a html?', '', 'Activa', '2021-06-01'),
+(28, 'Marco Antonio Eleno Tovar', ' I am trying to pass an image from python to html but I am having difficulty opening the image', '', 'Cancelada', '2021-06-01');
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `tiempo`
 --
 
@@ -32,39 +57,20 @@ CREATE TABLE `tiempo` (
   `nombre` varchar(40) NOT NULL,
   `hora` varchar(50) NOT NULL,
   `dia` date NOT NULL,
-  `h_inicio` varchar(50) NOT NULL,
-  `h_fin` varchar(50) NOT NULL
+  `h_inicio` time NOT NULL,
+  `h_fin` time DEFAULT NULL,
+  `play` bit(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `tiempo`
 --
 
-INSERT INTO `tiempo` (`id`, `nombre`, `hora`, `dia`, `h_inicio`, `h_fin`) VALUES
-(1, 'Marco Antonio Eleno Tovar', '00:00:00', '0000-00-00', '', ''),
-(2, 'Marco Antonio Eleno Tovar', '00:00:00', '0000-00-00', '', ''),
-(3, 'Marco Antonio Eleno Tovar', '0 :0 :11', '2021-07-09', '', ''),
-(4, 'Marco Antonio Eleno Tovar', '0 :0 :0 ', '2021-07-10', '11:39:43', '13:4:43'),
-(5, 'Marco Antonio Eleno Tovar', '0 :0 :0 ', '2021-07-10', '13:6:42', '13:6:44'),
-(6, 'Marco Antonio Eleno Tovar', '0 :0 :0 ', '2021-07-11', '10:48:25', '10:50:21'),
-(7, 'Marco Antonio Eleno Tovar', '0 :0 :0 ', '2021-07-11', '10:50:24', '10:50:51'),
-(8, 'Marco Antonio Eleno Tovar', '0 :0 :0 ', '2021-07-11', '10:50:51', '11:3:45'),
-(9, 'Marco Antonio Eleno Tovar', '0 :0 :0 ', '2021-07-11', '11:3:45', '11:31:46'),
-(10, 'Marco Antonio Eleno Tovar', '0 :0 :0 ', '2021-07-11', '11:32:40', '11:32:40'),
-(11, 'Marco Antonio Eleno Tovar', '0 :0 :0 ', '2021-07-11', '11:34:45', '11:34:45'),
-(12, 'Marco Antonio Eleno Tovar', '0 :0 :0 ', '2021-07-11', '11:39:4', '11:57:40'),
-(13, 'Marco Antonio Eleno Tovar', '0 :0 :0 ', '2021-07-11', '11:57:41', '11:57:51'),
-(14, 'Marco Antonio Eleno Tovar', '0 :0 :0 ', '2021-07-11', '11:58:3', '12:4:17'),
-(15, 'Marco Antonio Eleno Tovar', '0 :0 :9', '2021-07-11', '12:4:49', '12:5:6'),
-(16, 'Marco Antonio Eleno Tovar', '0 :0 :4', '2021-07-12', '8:45:11', '8:45:18'),
-(17, 'Marco Antonio Eleno Tovar', '0 :0 :8', '2021-07-12', '9:43:19', '9:43:22'),
-(18, 'Marco Antonio Eleno Tovar', '0 :0 :8', '2021-07-12', '10:21:42', '9:43:22'),
-(19, 'Marco Antonio Eleno Tovar', '0 :0 :7', '2021-07-12', '10:31:51', '10:31:53'),
-(20, 'Marco Antonio Eleno Tovar', '0 :0 :4', '2021-07-12', '10:32:0', '10:32:19'),
-(21, 'Marco Antonio Eleno Tovar', '0 :0 :8', '2021-07-12', '10:32:23', '10:33:18'),
-(22, 'Marco Antonio Eleno Tovar', '0 :0 :8', '2021-07-12', '10:34:29', '10:34:32'),
-(23, 'Marco Antonio Eleno Tovar', '0 :0 :3', '2021-07-12', '11:42:5', '12:11:12'),
-(24, 'Marco Antonio Eleno Tovar', '0 :0 :23', '2021-07-12', '13:28:4', '20:28:41');
+INSERT INTO `tiempo` (`id`, `nombre`, `hora`, `dia`, `h_inicio`, `h_fin`, `play`) VALUES
+(234, 'Marco Antonio Eleno Tovar', '0:1:33', '2021-07-24', '11:21:37', '11:23:11', b'0'),
+(235, 'Marco Antonio Eleno Tovar', '0:2:14', '2021-07-25', '08:15:52', '08:18:06', b'0'),
+(236, 'Marco Antonio Eleno Tovar', '0:1:37', '2021-07-25', '08:18:08', '08:19:46', b'0'),
+(237, 'Ricardo Baeza Candor', '0:0:4', '2021-07-25', '08:19:44', '08:19:49', b'0');
 
 -- --------------------------------------------------------
 
@@ -84,11 +90,18 @@ CREATE TABLE `usuarios` (
 --
 
 INSERT INTO `usuarios` (`id`, `nombre`, `clave`, `nomCom`) VALUES
-(1, 'marco eleno', '1234', 'Marco Antonio Eleno Tovar');
+(1, 'marco eleno', '1234', 'Marco Antonio Eleno Tovar'),
+(2, 'ricardo', '1234', 'Ricardo Baeza Candor');
 
 --
 -- Índices para tablas volcadas
 --
+
+--
+-- Indices de la tabla `tareas`
+--
+ALTER TABLE `tareas`
+  ADD PRIMARY KEY (`id_tarea`);
 
 --
 -- Indices de la tabla `tiempo`
@@ -107,16 +120,22 @@ ALTER TABLE `usuarios`
 --
 
 --
+-- AUTO_INCREMENT de la tabla `tareas`
+--
+ALTER TABLE `tareas`
+  MODIFY `id_tarea` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+
+--
 -- AUTO_INCREMENT de la tabla `tiempo`
 --
 ALTER TABLE `tiempo`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=238;
 
 --
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
