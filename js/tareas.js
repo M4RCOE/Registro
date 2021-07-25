@@ -193,6 +193,7 @@ function tarea(n) {
 		console.log("span "+sp)
 		div.appendChild(newLabel);
 		div.appendChild(sp);
+		div.addEventListener("click", tareaclick, false);
 
 		contenedor.appendChild(div);
 		contenedor.appendChild(hr);
@@ -212,6 +213,8 @@ function tarea(n) {
 		$("#a1").show();
 	}
 }
+
+
  
 
  

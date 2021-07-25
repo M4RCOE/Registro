@@ -10,10 +10,11 @@
     if($query->rowCount() >0){
     /* foreach ($list as $rs) {
 
-         echo($rs['tarea']."|".$rs['fecha']."|".$rs['estado']."");
+         echo($rs['tarea']."|".$rs['fecha']."|".$rs['id_tarea']."|".$rs['residente']."|");
     } */
-    
-      echo json_encode($list);
+    echo json_encode($list);
+}else{
+     echo 0;
 }
     
 ?>   

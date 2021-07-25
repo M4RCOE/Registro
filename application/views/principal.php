@@ -2,7 +2,7 @@
 
     <br>
 <div >
-
+ 
 
     <center>
  
@@ -13,7 +13,7 @@
                 <thead class="thead bg-dark text-white ">
 
                     <tr>
-                        <th colspan="7" class="text-center"style='border-top-right-radius: 18px; border-top-left-radius: 18px; border:0px;'>
+                        <th colspan="7" class="text-center"style='border-top-right-radius: 10px; border-top-left-radius: 10px; border:0px;'>
                             <H3>Residentes</H3>
                         </th>
                        
@@ -46,7 +46,7 @@
 
                         </script>
                         <span class="text-muted ml-1 mr-0"> Actual</span>
-                       
+                       <span id='time<?php echo($domain)?>'></span>
                         <input style="background-color:transparent; width: 13px"
                             class="p-0 m-0 text-center border-0 text-muted" id="horas2<?php echo($domain)?>" type="text"
                             value="00 " name="t1" disabled />
@@ -67,7 +67,7 @@
           
           echo("<td colspan='2'>");
              
-            echo("<button style=' border-radius: 24px; padding:10px 20px; border: 2px solid #00690B;' type='button' id='p".($domain)."' class='btn btn-success float-right ' onclick=iniciar(this,0)> Play</button>"); 
+            echo("<button style=' border-radius: 24px; padding:10px 20px; border: 2px solid #00690B;' type='button' id='p".($domain)."' class='btn btn-success float-right ' onclick=iniciar(this,0)> Iniciar</button>"); 
    
             
           ?>
@@ -76,65 +76,6 @@
                     <script>
                         
                         corriendo('<?php echo($u)?>')
-                         
-                         
-                        let hrs = localStorage.getItem('horaD<?php echo($domain)?>');
-                        let dia = localStorage.getItem('diaD<?php echo($domain)?>');
-                        let b = localStorage.getItem('p<?php echo($domain)?>');
-                        let obj = localStorage.getItem('o<?php echo($domain)?>');
-                        console.log(" fecha:"+dia+" horas"+hrs)
-                        if (hrs != null&&dia!= null){
-                           hr=hrs.split(':')
-                           dias=dia.split('-')
-                           console.log(dias)
-                           mes=parseInt(dias[1])
-                           mes=mes-1
-                           
-                           console.log('fecha N '+dias[0]+" "+mes+" "+dias[2]+" "+hr[0]+" "+hr[1]+" "+hr[2])
-                        f2 = new Date(
-                            dias[0],
-                            mes,
-                            dias[2],
-                            hr[0],
-                            hr[1],
-                            hr[2]);
-                        f1 = new Date();
-                        console.log('Dias:'+dias)
-                        console.log('Tiempo 1:'+f1 )
-                        console.log('Tiempo 2:'+f2 )
-                        console.log('Diferencia00:'+(f1-f2))
-                        let tiempo3=new Date(f1-f2)
-                        if(b!=null){
-                           if(=='Finalizar'){
-                            document.getElementById("p<?php echo($domain)?>").innerHTML = b;
-                            document.getElementById("horas2<?php echo($domain)?>").value = (tiempo3.getHours()-18);
-                            document.getElementById("minutos2<?php echo($domain)?>").value = tiempo3.getMinutes();
-                            document.getElementById("segundos2<?php echo($domain)?>").value = tiempo3.getSeconds();
-                        
-                           }
-                         }
-
-                        }
-                       
-                     
-                          
-                          
-                          
-                         
-                            
-                        
-                          
-                        
-                        o = document.getElementById("p<?php echo($domain)?>")
-                        
-
-                        if (b == 'Finalizar' ) {  
-                            console.log('continua')
-                            iniciar(o, 1)
-                        }else{
-                             
-                            document.getElementById('p<?php echo($domain)?>').innerHTML='Play'
-                        }
 
                     </script>
 
@@ -155,9 +96,7 @@
    echo("<td>");
     
    ?>
-
-
-        </div>
+           
 
         <div class="container">
             <!-- The Modal -->
@@ -262,67 +201,10 @@
                                                 <nav class="navbar">
                                                    
                                                     <div class="form-check text-dark menu" id="contiene<?php echo($domain)?>" 
-                                                    style='overflow-y: auto;height: 500px; width: 400px;'onclick='modalTarea()'>
+                                                    style='overflow-y: auto;height: 500px; width: 400px;'>
                                                     </div>
                                             </div>
-                                            <script>
-                                                        cargaTareas('<?php echo($u)?>');
-                                                        function cargaTareas(n){
-	nn=n.split(' ')
-	let br = document.createElement("br");
-let sp = document.createElement("span");
-let hr = document.createElement("hr");
-let div = document.createElement("div");
-let newLabel = document.createElement("label");
-let contenedor = document.getElementById("contiene"+nn[0]);
-var parametros = { nomb: n};
-$.ajax({
-url: "http://localhost:82/residencia/php/muestraTareas.php",
-type: "POST",
-data: parametros,
-success: function (r) {
- console.log("r:"+r)
 
-    if(!r.empty()){
-        JSON.parse(r)
-        console.log(r.residente)
-        /* mt2=r.split('|') */
-    }
-
-/* console.log(mt2[1]+"-"+mt2[0])
-console.log(mt2) */
-
-div.className = "container";
-newLabel.innerHTML=mt2[1]+"  "+mt2[0]
-sp.innerHTML=mt2[2]
-sp.className ='float-right text-success'
- 
-
-div.appendChild(newLabel);
-div.appendChild(sp);
-
-contenedor.appendChild(div);
-contenedor.appendChild(hr);
-contenedor.appendChild(br);  
- 
-  
-  
-
-
-},
-});
-
-}
-
-                                                    </script>
-                                            <style>
-                                                .menu div:hover {
-                                                    background-color:#e6f0ff;
-                                                    border-radius: 15px;
-                                                    border:0px;
-                                                    padding: 15px;
-                                                }
-                                            </style>
                                             </nav>
                                         </div>
                                         <!--  -->
@@ -342,6 +224,131 @@ contenedor.appendChild(br);
                     </div>
                 </div>
             </div>
+
+
+
+            <div class="modal" tabindex="-1"id="modalTarea<?php echo($domain)?>">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id='TmT'></h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                <center>
+                    <form id='CambiaTarea'>
+                    <input class='rounded border-1 border-secondary' type="text" name='id_tarea'id='mid' hidden> 
+                    <input class='rounded border-1 border-secondary' type="text" name='estado'id='me' hidden> 
+                    <input class='rounded border-1 border-secondary 'type="text" name='nombre'id='mtn' style="width:320px; height:40px; text-align: center;" readonly><br>
+                    
+                    <textarea class='rounded border-1 border-secondary mt-2'name='tarea' maxlength="300"style="width:320px; height:50px; text-align: center;"  name='tarea' id='mtt'></textarea>
+                    <input class='rounded border-1 border-secondary mt-2'type="text" name='fecha' id='mtf'style="width:320px; height:40px; text-align: center;"><br>
+                    <textarea class='rounded border-1 border-secondary mt-2'name='comentario' maxlength="300"style="width:320px; height:40px; text-align: center;" placeholder='Comentario'></textarea>
+                     
+				 
+                    <br><br>
+						<button class="btn btn-success btn-line-success btn-round" type="button" onclick='document.getElementById("me").value ="Terminada"'>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check2" viewBox="0 0 16 16">
+                        <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/>
+                        </svg></button>                        
+						<button class="btn btn-danger btn-line-danger btn-round" type="button"onclick='document.getElementById("me").value ="Cancelada"'>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pause" viewBox="0 0 16 16">
+                        <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"></path>
+                        </svg></button>
+						<button class="btn btn-secondary btn-line-secondary btn-round" type="button"onclick='document.getElementById("me").value ="Pausada"'>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pause" viewBox="0 0 16 16">
+                        <path d="M6 3.5a.5.5 0 0 1 .5.5v8a.5.5 0 0 1-1 0V4a.5.5 0 0 1 .5-.5zm4 0a.5.5 0 0 1 .5.5v8a.5.5 0 0 1-1 0V4a.5.5 0 0 1 .5-.5z"/>
+                        </svg></button>
+					 <br>
+ 
+                    </form>    
+                    
+                    </center>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-primary" onclick=cambiosT(this) data-bs-dismiss="modal">Guardar</button>
+                </div>
+                </div>
+            </div>
+            </div>
+
+        </div>
+
+        <script>
+                                                        cargaTareas('<?php echo($u)?>');
+function cargaTareas(n){
+	nn=n.split(' ')
+
+var parametros = { nomb: n};
+let r2
+$.ajax({
+url: "http://localhost:82/residencia/php/muestraTareas.php",
+type: "POST",
+data: parametros,
+success: function (r) {
+ 
+
+    if(r!=0){
+        
+        r2= JSON.parse(r)
+        for(i=0;i<r2.length;i++){
+ 
+            if(r2[i].residente==n){
+            let br = document.createElement("br");
+            let sp = document.createElement("span");
+            let hr = document.createElement("hr");
+            let div = document.createElement("div");
+            let newLabel = document.createElement("label");
+            let contenedor = document.getElementById("contiene"+nn[0]);
+            div.className = "container";
+            sp.innerHTML='Activa'
+            sp.className ='float-right text-success'
+            
+        /* mt3=r.split('|') */
+        sp.id=r2[i].id_tarea
+        newLabel.id=nn
+        newLabel.innerHTML=r2[i].fecha+" , "+r2[i].tarea
+        div.appendChild(newLabel);
+        div.appendChild(sp);
+        div.addEventListener("click", tareaclick, false);
+
+        contenedor.appendChild(div);
+        contenedor.appendChild(hr);
+        contenedor.appendChild(br);
+                }
+            }
+    }
+},
+});
+
+}
+function tareaclick(){
+    let txt=this.childNodes[0].innerText
+    let txt3=this.childNodes[1]
+    let txt2=txt.split(',')
+    let name= this.childNodes[0].id
+    console.log(txt2[0].replaceAll('-','/')+'-> '+name.split(',',1))
+    console.log(txt3.id)
+     
+    document.getElementById("TmT").innerText="Tarea#"+txt3.id
+    document.getElementById("mid").value=txt3.id
+    document.getElementById("mtn").value=name.replaceAll(',',' ')
+    document.getElementById("mtt").value=txt2[1]
+    document.getElementById("mtf").value=txt2[0] 
+    $("#modalTarea"+name.split(',',1)).modal('show');
+
+
+}
+</script>
+                                            <style>
+                                                .menu div:hover {
+                                                    background-color:#e6f0ff;
+                                                    border-radius: 15px;
+                                                    border:0px;
+                                                    padding: 15px;
+                                                }
+                                            </style>
             <?php
   
    echo("</td>");

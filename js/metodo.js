@@ -18,12 +18,12 @@ iniciar = function (nom, c) {
 		document.getElementById("segundos2" + str2).value = 0;
 		document.getElementById("minutos2" + str2).value = 0;
 		document.getElementById("horas2" + str2).value = 0;
-		btn.innerHTML = "Play";
-		localStorage.setItem("p" + str2, "play");
+		btn.innerHTML = "Iniciar";
+		localStorage.setItem("p" + str2, "Iniciar");
 		location.reload();
 	} else {
 		
-
+console.log(str2+"  c:"+c)
 		if (c == 0) {
 		btn.innerHTML = "Finalizar";
 		localStorage.setItem("o" + str2, 0);
@@ -38,6 +38,7 @@ iniciar = function (nom, c) {
 			document.getElementById("segundos2" + str2).value = tiempo.getSeconds();
 			document.getElementById("minutos2" + str2).value = tiempo.getMinutes();
 			document.getElementById("horas2" + str2).value = tiempo.getHours();
+			document.getElementById("time" + str2).value = tiempo.getHours()+":"+tiempo.getMinutes()+":"+tiempo.getSeconds();
 			
 		}, 1000);
 		 
@@ -114,8 +115,7 @@ dia = function (n) {
 		success: function (r) {
 			n2 = n.split(" ", 1);
 
-			/* console.log(para_graficaic);
-			console.log(r.split(",")); */
+			 
 			r2 = r.split(",");
 			for (x = 0; x < r2.length; x = x + 2) {
 				var d = new Date("0001-01-01T" + r2[x - 1]);
@@ -142,13 +142,13 @@ dia = function (n) {
 				}
 			}
 			dds["myChart" + n2] = para_graficaic;
-			/* console.log(dds["myChart" + n2])
-			console.log(para_graficaic) */
+	 
 		},
 	});
 };
 
 corriendo = function (n) {
+	
 	var parametros = { nomb: n };
 	$.ajax({
 		url: "http://localhost:82/residencia/php/corriendo.php",
@@ -164,21 +164,59 @@ corriendo = function (n) {
 				//data=JSON.parse(r)
 				console.log('Respuesta'+r.split("|")[1])
 				console.log('Respuesta'+r.split("|")[0])
+				hrs=r.split("|")[0]
+				dia=r.split("|")[1]
+				hr=hrs.split(':')
+                dias=dia.split('-')
+				mes=parseInt(dias[1])
+                mes=mes-1
+				document.getElementById('p'+n2).innerHTML='Finalizar'
+				f2 = new Date(
+					dias[0],
+					mes,
+					dias[2],
+					hr[0],
+					hr[1],
+					hr[2]);
+				f1 = new Date();
+				let tiempo3=new Date(f1-f2)
+				console.log("Tiempo "+(tiempo3.getHours()-18)+":"+tiempo3.getMinutes()+":"+tiempo3.getSeconds())
+				document.getElementById("horas2"+n2).value = (tiempo3.getHours()-18);
+                document.getElementById("minutos2"+n2).value = tiempo3.getMinutes();
+                document.getElementById("segundos2"+n2).value = tiempo3.getSeconds();
+				o = document.getElementById("p"+n2)
+				iniciar(o, 1)
 			 
 				//document.getElementById("c"+n2).value=1
 				localStorage.setItem("diaD" + n2, r.split("|")[1]);
 				localStorage.setItem("horaD" + n2, r.split("|")[0]);
 				localStorage.setItem("o" + n2, 0);
 				localStorage.setItem("p" + n2, "Finalizar");
-			 }else{
-				localStorage.setItem("p" + n2, "Play");
+				console.log('info '+n)
+			 } else{
+				 console.log('nada'+n)
+				 localStorage.clear()
 			 }
 			
 		},
 	});
 };
 
- 
-
+function tareaclick(di,n){
+    
+    console.log('tareas '+div.childNodes)
+    $("#modalTarea"+n).modal('show');
+}
+cambiosT = function (n) {
+	
+	$.ajax({
+		url: "http://localhost:82/residencia/php/actualizaT.php",
+		type: "POST",
+		data: $("#CambiaTarea").serialize(),
+		success: function (r) {
+			console.log(r);
+		},
+	});
+};
 
  
