@@ -7,5 +7,5 @@ include ("conecta.php");
         $query->execute(); 
            
          
- //echo("nom: ".$_POST['nombre']."tarea: ".$_POST['tarea']."fecha: ".$_POST['fecha']."comentario: ".$_POST['comentario']."estado: ".$_POST['estado']) 
+//echo("nom: ".$_POST['nombre']."tarea: ".$_POST['tarea']."fecha: ".$_POST['fecha']."comentario: ".$_POST['comentario']."estado: ".$_POST['estado']) 
 ?>

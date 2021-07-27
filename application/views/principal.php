@@ -31,10 +31,10 @@
           echo("<tr class='datos' data-toggle='modal' data-id=".$domain."data-target='#im".$domain."'>");
           
           echo("<td hidden>".$domain."</td>");
-          echo("<td><img src='https://image.flaticon.com/icons/png/512/560/560216.png 'width='50' height='50'style='position: relative;'></td>");
-          echo("<td class='mt-5 pt-4'>");
+          echo("<td class='p-0 pt-2'><img class='pr-2' src='https://image.flaticon.com/icons/png/512/560/560216.png 'width='55' height='50'style='position: relative;'align='right'></td>");
+          echo("<td class='mt-5 pt-4 pb-2 pl-0'>");
           
-            echo ("<p style='font-size: 18px;width:240px;' class ='m-0' id='pr".$domain."'>".$u."</p>");
+            echo ("<p style='font-size: 20px;width:240px;' class ='m-0' id='pr".$domain."'>".$u."</p>");
             ?>
                     <div style="font-size: 12px"  >
                         <span class="text-muted">Horas mensuales</span>
@@ -76,6 +76,7 @@
                     <script>
                         
                         corriendo('<?php echo($u)?>')
+                      
 
                     </script>
 
@@ -141,10 +142,10 @@
                                 
 
                                                 
-                                    <div class='d-flex ' style="width:800px;">
+                                    <div id='<?php echo($u)?>' class='d-flex ' style="width:800px;">
                                         <div>
                                             <!--  -->
-                                            <div class="d-flex flex-column flex-shrink-0 mt-2 text-white bg-primary"
+                                            <div id='<?php echo($u)?>' class="d-flex flex-column flex-shrink-0 mt-2 text-white bg-primary"
                                                 style="width:400px; height:600px;">
                                                 <br>
                                                 <h2 class="text-center">Calendario</h2>
@@ -153,19 +154,23 @@
 
                                                 
                                                     <input type="text" class='rounded border-0' placeholder="Tarea"
-                                                        id='title'
+                                                        id='title<?php echo($domain)?>'
                                                         style="width:320px; height:40px; text-align: center;" >
+                                                    
                                                     <input type="text" class='rounded border-0 mt-3' placeholder="Fecha"
-                                                        id='fecha' style="width:320px; height:40px; text-align: center;"
+                                                        id='fecha2<?php echo($domain)?>' style="width:320px; height:40px; text-align: center;"
                                                         readonly >
-                                                    <input type="text" class='rounded border-0 mt-3' placeholder="Fecha"
-                                                        id='fecha2' style="width:320px; height:40px; text-align: center;"
-                                                        hidden >
+                                            
 
                                                     <button type="button" class="mt-2 mb-1 btn btn-primary"
-                                                        onclick="tarea('<?php echo($u)?>')">Agregar</button>
+                                                        onclick="tarea(this)">Agregar</button>
+                                                       <script>
+                                                        gg = new Date();
+                                                         
+                                                        document.getElementById("fecha2<?php echo($domain)?>").value =gg.getFullYear()+"-"+gg.getMonth()+"-"+gg.getDate();
+                                                       </script>
                                                         
-                                                        <div  class="calendar pt-0 mt-0" style="width:300px; height:10px;" >
+                                                        <div id='<?php echo($u)?>' class="calendar pt-0 mt-0" style="width:300px; height:10px;" >
                                                     <div class="header" style="width:300px; height:75px;" >
                                                         <a data-action="prev-month" href="javascript:void(0)"
                                                             title="Previous Month"><i></i></a>
@@ -224,38 +229,38 @@
                     </div>
                 </div>
             </div>
-
+          
 
 
             <div class="modal" tabindex="-1"id="modalTarea<?php echo($domain)?>">
             <div class="modal-dialog">
                 <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id='TmT'></h5>
+                    <h5 class="modal-title" id='TmT<?php echo($domain)?>'></h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="modal-body">
+                <div  class="modal-body">
                 <center>
-                    <form id='CambiaTarea'>
-                    <input class='rounded border-1 border-secondary' type="text" name='id_tarea'id='mid' hidden> 
-                    <input class='rounded border-1 border-secondary' type="text" name='estado'id='me' hidden> 
-                    <input class='rounded border-1 border-secondary 'type="text" name='nombre'id='mtn' style="width:320px; height:40px; text-align: center;" readonly><br>
+                    <form id='CambiaTarea<?php echo($domain)?>'>
+                    <input class='rounded border-1 border-secondary' type="text" name='id_tarea'id='mid<?php echo($domain)?>' hidden> 
+                    <input class='rounded border-1 border-secondary' type="text" name='estado'id='me<?php echo($domain)?>' value='Activa' hidden> 
+                    <input class='rounded border-1 border-secondary 'type="text" name='nombre'id='mtn<?php echo($domain)?>' style="width:320px; height:40px; text-align: center;" readonly><br>
                     
-                    <textarea class='rounded border-1 border-secondary mt-2'name='tarea' maxlength="300"style="width:320px; height:50px; text-align: center;"  name='tarea' id='mtt'></textarea>
-                    <input class='rounded border-1 border-secondary mt-2'type="text" name='fecha' id='mtf'style="width:320px; height:40px; text-align: center;"><br>
+                    <textarea class='rounded border-1 border-secondary mt-2'name='tarea' maxlength="300"style="width:320px; height:50px; text-align: center;"  name='tarea' id='mtt<?php echo($domain)?>'></textarea>
+                    <input class='rounded border-1 border-secondary mt-2'type="text" name='fecha' id='mtf<?php echo($domain)?>'style="width:320px; height:40px; text-align: center;"><br>
                     <textarea class='rounded border-1 border-secondary mt-2'name='comentario' maxlength="300"style="width:320px; height:40px; text-align: center;" placeholder='Comentario'></textarea>
                      
 				 
                     <br><br>
-						<button class="btn btn-success btn-line-success btn-round" type="button" onclick='document.getElementById("me").value ="Terminada"'>
+						<button class="btn btn-success btn-line-success btn-round" type="button" onclick='document.getElementById("me<?php echo($domain)?>").value ="Terminada"'>
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check2" viewBox="0 0 16 16">
                         <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/>
                         </svg></button>                        
-						<button class="btn btn-danger btn-line-danger btn-round" type="button"onclick='document.getElementById("me").value ="Cancelada"'>
+						<button class="btn btn-danger btn-line-danger btn-round" type="button"onclick='document.getElementById("me<?php echo($domain)?>").value ="Cancelada"'>
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pause" viewBox="0 0 16 16">
                         <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"></path>
                         </svg></button>
-						<button class="btn btn-secondary btn-line-secondary btn-round" type="button"onclick='document.getElementById("me").value ="Pausada"'>
+						<button class="btn btn-secondary btn-line-secondary btn-round" type="button"onclick='document.getElementById("me<?php echo($domain)?>").value ="Pausada"'>
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pause" viewBox="0 0 16 16">
                         <path d="M6 3.5a.5.5 0 0 1 .5.5v8a.5.5 0 0 1-1 0V4a.5.5 0 0 1 .5-.5zm4 0a.5.5 0 0 1 .5.5v8a.5.5 0 0 1-1 0V4a.5.5 0 0 1 .5-.5z"/>
                         </svg></button>
@@ -267,19 +272,22 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                    <button type="button" class="btn btn-primary" onclick=cambiosT(this) data-bs-dismiss="modal">Guardar</button>
+                    <button id='<?php echo($u)?>' type="button" class="btn btn-primary" onclick=cambiosT(this) data-bs-dismiss="modal">Guardar</button>
                 </div>
                 </div>
             </div>
             </div>
 
         </div>
-
+   
         <script>
+
                                                         cargaTareas('<?php echo($u)?>');
 function cargaTareas(n){
 	nn=n.split(' ')
-
+console.log('Cargando')
+let contenedor = document.getElementById("contiene"+nn[0]);
+contenedor.innerHTML='' 
 var parametros = { nomb: n};
 let r2
 $.ajax({
@@ -300,12 +308,17 @@ success: function (r) {
             let hr = document.createElement("hr");
             let div = document.createElement("div");
             let newLabel = document.createElement("label");
-            let contenedor = document.getElementById("contiene"+nn[0]);
-            div.className = "container";
-            sp.innerHTML='Activa'
-            sp.className ='float-right text-success'
             
-        /* mt3=r.split('|') */
+            div.className = "container";
+            sp.innerHTML= r2[i].estado
+            if(r2[i].estado=='Activa' ){
+                sp.className ='float-right text-success'
+            }else if(r2[i].estado=='Pausada'){
+                sp.className ='float-right text-secundary'
+            }else if(r2[i].estado=='Cancelada'){
+                sp.className ='float-right text-danger'
+            }
+               
         sp.id=r2[i].id_tarea
         newLabel.id=nn
         newLabel.innerHTML=r2[i].fecha+" , "+r2[i].tarea
@@ -324,22 +337,25 @@ success: function (r) {
 
 }
 function tareaclick(){
+    
+     
     let txt=this.childNodes[0].innerText
     let txt3=this.childNodes[1]
     let txt2=txt.split(',')
     let name= this.childNodes[0].id
     console.log(txt2[0].replaceAll('-','/')+'-> '+name.split(',',1))
-    console.log(txt3.id)
-     
-    document.getElementById("TmT").innerText="Tarea#"+txt3.id
-    document.getElementById("mid").value=txt3.id
-    document.getElementById("mtn").value=name.replaceAll(',',' ')
-    document.getElementById("mtt").value=txt2[1]
-    document.getElementById("mtf").value=txt2[0] 
+    console.log(this.childNodes[0].id.replaceAll(',',' ')) 
+    
+    document.getElementById("TmT"+name.split(',',1)).innerText="Tarea#"+txt3.id
+    document.getElementById("mid"+name.split(',',1)).value=txt3.id
+    document.getElementById("mtn"+name.split(',',1)).value=name.replaceAll(',',' ')
+    document.getElementById("mtt"+name.split(',',1)).value=txt2[1]
+    document.getElementById("mtf"+name.split(',',1)).value=txt2[0] 
     $("#modalTarea"+name.split(',',1)).modal('show');
 
 
 }
+ 
 </script>
                                             <style>
                                                 .menu div:hover {

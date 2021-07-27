@@ -106,7 +106,7 @@ horas = function (n) {
 
 dds = {};
 dia = function (n) {
-	console.log('dentro de dia '+n)
+	//console.log('dentro de dia '+n)
 	let para_graficaic = [0, 0, 0, 0, 0];
 	var parametros = { nomb: n };
 	$.ajax({
@@ -143,7 +143,7 @@ dia = function (n) {
 				}
 			}
 			dds["myChart" + n2] = para_graficaic;
-			console.log(n2+" "+para_graficaic)
+			//console.log(n2+" "+para_graficaic)
 		},
 	});
 };
@@ -195,7 +195,7 @@ corriendo = function (n) {
 				localStorage.setItem("p" + n2, "Finalizar");
 				console.log('info '+n)
 			 } else{
-				 console.log('nada'+n)
+				 //console.log('nada'+n)
 				 localStorage.clear()
 			 }
 			
@@ -203,21 +203,7 @@ corriendo = function (n) {
 	});
 };
 
-function tareaclick(di,n){
-    
-    console.log('tareas '+div.childNodes)
-    $("#modalTarea"+n).modal('show');
-}
-cambiosT = function (n) {
-	
-	$.ajax({
-		url: "http://localhost:82/residencia/php/actualizaT.php",
-		type: "POST",
-		data: $("#CambiaTarea").serialize(),
-		success: function (r) {
-			console.log(r);
-		},
-	});
-};
+ 
+
 
  

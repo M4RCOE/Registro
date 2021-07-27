@@ -2,7 +2,7 @@
    include ("conecta.php"); 
     $pdo = connect();
     //$sql = "SELECT TIME_FORMAT(SEC_TO_TIME(SUM(TIME_TO_SEC(hora))), '%H:%i:%s') as hrs FROM tiempo where nombre='".$_POST['nomb']."'";
-    $sql = "SELECT * from tareas where residente='".$_POST['nomb']."' and estado='Activa'";
+    $sql = "SELECT * from tareas where residente='".$_POST['nomb']."' ";
     $query = $pdo->prepare($sql);
     $query->execute();
     $list = $query->fetchAll();
