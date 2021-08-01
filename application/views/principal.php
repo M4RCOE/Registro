@@ -64,15 +64,22 @@
         echo("</td>");
         
         echo("<td colspan='2'>");
+           ?>
+           <div class='d-flex justify-content-center'>
+           <button style=' border-radius: 24px; padding:10px 20px; border: 2px solid darkslategray;' onclick='desaparece(this)' id='bc1<?php echo($domain)?>' type='button'   class='btn btn-primary mt-1 pl-2 pr-2'  > Continuar</button>
            
-          echo("<button style=' border-radius: 24px; padding:10px 20px; border: 2px solid #00690B;' type='button' id='p".($domain)."' class='btn btn-success float-right mt-1' onclick=iniciar(this,0)> Iniciar</button>"); 
- 
+          <button class="rounded-circle border-0 bg-transparent  translate-middle-x ml-5 mr-0 pr-0" id='bc<?php echo($domain)?>' onclick='aparece(this)'>
+           <img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iaXNvLTg4NTktMSI/Pg0KPCEtLSBHZW5lcmF0b3I6IEFkb2JlIElsbHVzdHJhdG9yIDE5LjAuMCwgU1ZHIEV4cG9ydCBQbHVnLUluIC4gU1ZHIFZlcnNpb246IDYuMDAgQnVpbGQgMCkgIC0tPg0KPHN2ZyB2ZXJzaW9uPSIxLjEiIGlkPSJDYXBhXzEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHg9IjBweCIgeT0iMHB4Ig0KCSB2aWV3Qm94PSIwIDAgNTEyIDUxMiIgc3R5bGU9ImVuYWJsZS1iYWNrZ3JvdW5kOm5ldyAwIDAgNTEyIDUxMjsiIHhtbDpzcGFjZT0icHJlc2VydmUiPg0KPGNpcmNsZSBzdHlsZT0iZmlsbDojMjVEOUY4OyIgY3g9IjI1NiIgY3k9IjI1NiIgcj0iMjU2Ii8+DQo8cGF0aCBzdHlsZT0iZmlsbDojMDBDMEYxOyIgZD0iTTUwNi41LDMwOC45NjdsLTE3OC45Ni0xNzguOTZMMjM4LDEzN2wtNTEsNjhsLTMxLjU0Nyw0Mi40NjlMMTM3LjE3Miw0MTJsOTkuMjYyLDk5LjI2Mg0KCUMyNDIuODkyLDUxMS43NSwyNDkuNDE3LDUxMiwyNTYsNTEyQzM3OS4yMjQsNTEyLDQ4Mi4xLDQyNC45MzQsNTA2LjUsMzA4Ljk2N3oiLz4NCjxwYXRoIHN0eWxlPSJmaWxsOiM1QTVBNUE7IiBkPSJNMjU2LDEwMGMtNTUuMzkzLDAtMTAwLjU0Nyw0NS4xNTQtMTAwLjU0NywxMDAuNTQ3djU2LjA2M2g1NC44NDR2LTU2LjA2Mw0KCWMwLTI1LjIyOCwyMC40NzUtNDUuNzAzLDQ1LjcwMy00NS43MDNzNDUuNzAzLDIwLjQ3NSw0NS43MDMsNDUuNzAzdjU2LjA2M2g1NC44NDR2LTU2LjA2M0MzNTYuNTQ3LDE0NS4xNTQsMzExLjM5MywxMDAsMjU2LDEwMHoiLz4NCjxwYXRoIHN0eWxlPSJmaWxsOiM0NDQ0NDQ7IiBkPSJNMzU2LjU0NywyMDAuNTQ3djU2LjA2M2gtNTQuODQ0di01Ni4wNjNjMC0yNS4yMjgtMjAuNDc1LTQ1LjcwMy00NS43MDMtNDUuNzAzVjEwMA0KCUMzMTEuMzkzLDEwMCwzNTYuNTQ3LDE0NS4xNTQsMzU2LjU0NywyMDAuNTQ3eiIvPg0KPHBhdGggc3R5bGU9ImZpbGw6I0ZGRDQwMDsiIGQ9Ik0xMzcuMTcyLDI0Ny40NjlWNDEyaDIzNy42NTZWMjQ3LjQ2OUgxMzcuMTcyeiIvPg0KPHJlY3QgeD0iMjU2IiB5PSIyNDcuNDciIHN0eWxlPSJmaWxsOiNGRjlGMDA7IiB3aWR0aD0iMTE4LjgzIiBoZWlnaHQ9IjE2NC41MyIvPg0KPGc+DQoJPHBhdGggc3R5bGU9ImZpbGw6IzVBNUE1QTsiIGQ9Ik0yNTYsMjg0LjAzMWMtMTUuMTc0LDAtMjcuNDIyLDEyLjI0OC0yNy40MjIsMjcuNDIyYzAsMTUuMTczLDEyLjI0OCwyNy40MjIsMjcuNDIyLDI3LjQyMg0KCQljMTUuMTc0LDAsMjcuNDIyLTEyLjI0OSwyNy40MjItMjcuNDIyQzI4My40MjIsMjk2LjI3OSwyNzEuMTc0LDI4NC4wMzEsMjU2LDI4NC4wMzF6Ii8+DQoJPHJlY3QgeD0iMjQ2Ljg2IiB5PSIzMjkuNzMiIHN0eWxlPSJmaWxsOiM1QTVBNUE7IiB3aWR0aD0iMTguMjgxIiBoZWlnaHQ9IjQ1LjcwMyIvPg0KPC9nPg0KPGc+DQoJPHBhdGggc3R5bGU9ImZpbGw6IzQ0NDQ0NDsiIGQ9Ik0yODMuNDIyLDMxMS40NTNjMCwxNS4xNzMtMTIuMjQ4LDI3LjQyMi0yNy40MjIsMjcuNDIydi01NC44NDQNCgkJQzI3MS4xNzQsMjg0LjAzMSwyODMuNDIyLDI5Ni4yNzksMjgzLjQyMiwzMTEuNDUzeiIvPg0KCTxyZWN0IHg9IjI1NiIgeT0iMzI5LjczIiBzdHlsZT0iZmlsbDojNDQ0NDQ0OyIgd2lkdGg9IjkuMTQxIiBoZWlnaHQ9IjQ1LjcwMyIvPg0KPC9nPg0KPGc+DQo8L2c+DQo8Zz4NCjwvZz4NCjxnPg0KPC9nPg0KPGc+DQo8L2c+DQo8Zz4NCjwvZz4NCjxnPg0KPC9nPg0KPGc+DQo8L2c+DQo8Zz4NCjwvZz4NCjxnPg0KPC9nPg0KPGc+DQo8L2c+DQo8Zz4NCjwvZz4NCjxnPg0KPC9nPg0KPGc+DQo8L2c+DQo8Zz4NCjwvZz4NCjxnPg0KPC9nPg0KPC9zdmc+DQo=" height='50px' />
+           </button>
+           
+           <?php
+          echo("<button style=' border-radius: 24px; padding:10px 20px; border: 2px solid darkslategray;' type='button' id='p".($domain)."' class='btn btn-success float-right mt-1 ' onclick=iniciar(this,0)> Iniciar</button>"); 
           
         ?>
-
+</div>
 
             <script>
-
+              oculta('<?php echo($domain)?>')
               corriendo('<?php echo($u)?>')
 
 
@@ -113,18 +120,19 @@
                     <!-- Modal body -->
                     <div class="modal-body d-flex justify-content-between aling-items-center flex-column text-center">
                       <ul class="nav nav-tabs" id="myTab" role="tablist">
-                        <li class="nav-item">
-                          <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home<?php echo($domain)?>"
-                            role="tab" aria-controls="home" aria-selected="true">Grafica</a>
-                        </li>
-                        <li class="nav-item">
-                          <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile<?php echo($domain)?>"
+                      <li class="nav-item">
+                          <a class="nav-link active" id="profile-tab" data-toggle="tab" href="#profile<?php echo($domain)?>"
                             role="tab" aria-controls="profile" aria-selected="false">Tareas</a>
                         </li>
+                        <li class="nav-item">
+                          <a class="nav-link " id="home-tab" data-toggle="tab" href="#home<?php echo($domain)?>"
+                            role="tab" aria-controls="home" aria-selected="true">Grafica</a>
+                        </li>
+                        
 
                       </ul>
-                      <div class="tab-content" id="myTabContent">
-                        <div class="tab-pane fade show active" id="home<?php echo($domain)?>" role="tabpanel"
+                      <div class="tab-content" id="myTabContent" style='height:600px;'>
+                        <div class="tab-pane fade  " id="home<?php echo($domain)?>" role="tabpanel"
                           aria-labelledby="home-tab">
 
                           <center>
@@ -134,7 +142,7 @@
                         </div>
 
                         <script>	$('#a1').hide();</script>
-                        <div class="tab-pane fade" id="profile<?php echo($domain)?>" role="tabpanel"
+                        <div class="tab-pane fade show active" id="profile<?php echo($domain)?>" role="tabpanel"
                           aria-labelledby="profile-tab">
 
 
@@ -144,7 +152,7 @@
                               <!--  -->
                               <div id='<?php echo($u)?>'
                                 class="d-flex flex-column flex-shrink-0 mt-2 text-white bg-primary"
-                                style="width:400px; height:600px;">
+                                style="width:400px; height:580px;">
                                 <br>
                                 <h2 class="text-center">Calendario</h2>
                                 <hr>
@@ -218,7 +226,7 @@
                                   <li class="nav-item">
                                     <a class="nav-link  " id="home-tab" data-toggle="tab"
                                       href="#contiene4<?php echo($domain)?>" role="tab" aria-controls="home"
-                                      aria-selected="true">Finalizada</a>
+                                      aria-selected="true">Terminada</a>
                                   </li>
 
 
@@ -298,6 +306,11 @@
 
                           <br><br>
                           <button class="btn btn-success btn-line-success btn-round" type="button"
+                            onclick='document.getElementById("me<?php echo($domain)?>").value ="Activa"'>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-up" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd" d="M8 15a.5.5 0 0 0 .5-.5V2.707l3.146 3.147a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 1 0 .708.708L7.5 2.707V14.5a.5.5 0 0 0 .5.5z"/>
+                          </svg></button>
+                          <button class="btn btn-info btn-line-info btn-round" type="button"
                             onclick='document.getElementById("me<?php echo($domain)?>").value ="Terminada"'>
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                               class="bi bi-check2" viewBox="0 0 16 16">
@@ -374,7 +387,7 @@
                             sp.className = 'float-right text-success'
                             sp.id = r2[i].id_tarea
                             newLabel.id = nn
-                            newLabel.innerHTML = r2[i].fecha + ",   " + r2[i].tarea
+                            newLabel.innerHTML = r2[i].fecha + ",   " + urlify(r2[i].tarea)
                             div.appendChild(newLabel);
                             div.appendChild(sp);
                             div.addEventListener("click", tareaclick, false);
@@ -386,7 +399,7 @@
                             sp.className = 'float-right text-secundary'
                             sp.id = r2[i].id_tarea
                             newLabel.id = nn
-                            newLabel.innerHTML = r2[i].fecha + ",   " + r2[i].tarea
+                            newLabel.innerHTML = r2[i].fecha + ",   " + urlify(r2[i].tarea)
                             div.appendChild(newLabel);
                             div.appendChild(sp);
                             div.addEventListener("click", tareaclick, false);
@@ -397,7 +410,7 @@
                           } else if (r2[i].estado == 'Cancelada') {
                             sp.className = 'float-right text-danger'
                             newLabel.id = nn
-                            newLabel.innerHTML = r2[i].fecha + ",   " + r2[i].tarea
+                            newLabel.innerHTML = r2[i].fecha + ",   " + urlify(r2[i].tarea)
                             div.appendChild(newLabel);
                             div.appendChild(sp);
                             div.addEventListener("click", tareaclick, false);
@@ -405,17 +418,17 @@
                             contenedor3.appendChild(div);
                             contenedor3.appendChild(hr);
                             contenedor3.appendChild(br);
-                          } else if (r2[i].estado == 'Finalizada') {
-                            sp.className = 'float-right text-danger'
+                          } else if (r2[i].estado == 'Terminada') {
+                            sp.className = 'float-right text-info'
                             newLabel.id = nn
                             newLabel.innerHTML = r2[i].fecha + ",   " + r2[i].tarea
                             div.appendChild(newLabel);
                             div.appendChild(sp);
                             div.addEventListener("click", tareaclick, false);
 
-                            contenedor3.appendChild(div);
-                            contenedor3.appendChild(hr);
-                            contenedor3.appendChild(br);
+                            contenedor4.appendChild(div);
+                            contenedor4.appendChild(hr);
+                            contenedor4.appendChild(br);
                           }
 
 

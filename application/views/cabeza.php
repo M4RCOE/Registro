@@ -24,6 +24,7 @@
     <script src="<?php echo base_url('js/metodo.js');?>"></script>
   
     <link rel="stylesheet" type='text/css'  href="<?php echo base_url('css/estilos.css');?>">
+    
   
    
    

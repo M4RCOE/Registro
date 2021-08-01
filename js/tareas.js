@@ -189,7 +189,8 @@ function tarea(b) {
 		let div = document.createElement("div");
 		let newLabel = document.createElement("label");
 		div.className = "container";
-		newLabel.innerHTML=f+"-"+t
+    console.log('dentro de tarea'+urlify(t))
+		newLabel.innerHTML=f+"-"+urlify(t)
 		let contenedor = document.getElementById("contiene"+nn[0]);
 		sp.innerHTML='Activa'
 		sp.className ='float-right text-success'

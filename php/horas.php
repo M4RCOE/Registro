@@ -6,9 +6,14 @@
     $query = $pdo->prepare($sql);
     $query->execute();
     $list = $query->fetchAll();
+    if($query->rowCount() >0){
     foreach ($list as $rs) {
          echo($rs['hrs']);
     }
- 
+    
+      
+}else{ 
+    echo(0);
+}
     
 ?>    
