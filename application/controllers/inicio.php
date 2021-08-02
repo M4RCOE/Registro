@@ -44,6 +44,9 @@ class Inicio extends CI_Controller {
    public function admin(){
 	$this->load->view('admin');
 }
+   public function admin2(){
+	$this->load->view('admin2');
+}
   
 	 
 

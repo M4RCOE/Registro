@@ -165,10 +165,12 @@
         </a>
       </li>
       <li class="nav-item" onclick='cargaUser() '>
-        <a class="nav-link"  href="#user"  role="button">
+        <a class="nav-link"  href="<?php echo site_url('Inicio/admin2')?>"  role="button">
           
-        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-people" viewBox="0 0 16 16">
-  <path d="M15 14s1 0 1-1-1-4-5-4-5 3-5 4 1 1 1 1h8zm-7.978-1A.261.261 0 0 1 7 12.996c.001-.264.167-1.03.76-1.72C8.312 10.629 9.282 10 11 10c1.717 0 2.687.63 3.24 1.276.593.69.758 1.457.76 1.72l-.008.002a.274.274 0 0 1-.014.002H7.022zM11 7a2 2 0 1 0 0-4 2 2 0 0 0 0 4zm3-2a3 3 0 1 1-6 0 3 3 0 0 1 6 0zM6.936 9.28a5.88 5.88 0 0 0-1.23-.247A7.35 7.35 0 0 0 5 9c-4 0-5 3-5 4 0 .667.333 1 1 1h4.216A2.238 2.238 0 0 1 5 13c0-1.01.377-2.042 1.09-2.904.243-.294.526-.569.846-.816zM4.92 10A5.493 5.493 0 0 0 4 13H1c0-.26.164-1.03.76-1.724.545-.636 1.492-1.256 3.16-1.275zM1.5 5.5a3 3 0 1 1 6 0 3 3 0 0 1-6 0zm3-2a2 2 0 1 0 0 4 2 2 0 0 0 0-4z"/>
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-people-fill" viewBox="0 0 16 16">
+  <path d="M7 14s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1H7zm4-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
+  <path fill-rule="evenodd" d="M5.216 14A2.238 2.238 0 0 1 5 13c0-1.355.68-2.75 1.936-3.72A6.325 6.325 0 0 0 5 9c-4 0-5 3-5 4s1 1 1 1h4.216z"/>
+  <path d="M4.5 8a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5z"/>
 </svg>
         </a>
       </li>
@@ -437,89 +439,36 @@
 
 
     </script>
-    
-        <!-- Page Content  -->
-        <div class="alert alert-success text-center" id='alerta2' hidden role='alert'></div>
-        <div class="alert alert-danger text-center" id='alerta3' hidden role='alert'></div>
-<center>
- 
-
-<div id='user' style="width: 60%;">
-      <table class="table table-hover ml-4 mr-4" id="table">
-
-<thead class="thead bg-primary text-white ">
-
-  <tr>
-    <th colspan="7" class="text-center"
-      style='border-top-right-radius: 10px; border-top-left-radius: 10px; border:0px;'>
-      <H3>Usuarios</H3>
-    </th>
 
 
-  </tr>
-</thead>
-<tbody id='tuser'>
-     
-</tbody>
-
-      </div>
-      <!-- The Modal user -->
-<div class="modal" id="ModalUsersE">
-  <div class="modal-dialog">
+<!-- Modal -->
+<div class="modal fade" id="modalUrl" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
     <div class="modal-content">
-
-      <!-- Modal Header -->
       <div class="modal-header">
-        <h4 class="modal-title text-center">Editar Usuario</h4>
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h5 class="modal-title" id="exampleModalLabel">Modifica Url</h5>
+         
       </div>
-
-      <!-- Modal body -->
-      <div id='modalU' class="modal-body">
-          
-           <label >Nombre</label><br>
-          <input class=' border-0 text-center' type="text" name='nombre' id='Nommue' style='width:250px'><hr class='mt-0 pt-0' style='width:250px'><br>
-          <label >Alias</label><br>
-          <input class=' border-0 text-center mb-0 pb-0' type="text" name='alias' id='Alimue'><hr class='mt-0 pt-0' style='width:120px'><br>
-          <label >Menu</label><br>
-          <select class="select" id='MUserA'>
-            
-          </select>
-
-
-          
+      <div class="modal-body ">
+        <center>
+        <label >Url</label><br>
+       <input class='text-center' type="text" id='MUrl' placecholder='url'><br><br>
+       <label >Texto enlace</label><br>
+       <input class='text-center' type="text" id='MtxtUrl'placecholder='Texto enlace'>
+       <input class='text-center' type="text" id='MtxtUrl2'hidden>
+       <input class='text-center' type="text" id='Mid'hidden>
+        </center>
       </div>
-
-      <!-- Modal footer -->
       <div class="modal-footer">
-        <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
-        <button type="button" class="btn btn-success" data-dismiss="modal" onclick='editUser()' >Guardar</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal"onclick='guarda_url(contenedor)'>guardar</button>
       </div>
-
     </div>
   </div>
 </div>
- <!-- The Modal -->
- <div class="modal fade" id="ModalEliminaU">
-    <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content">
-      
-        <!-- Modal body -->
-        <div class="modal-body" id='MeUser'>
-          <h2>Atención!!</h2>
-          <input type="text"  id='EliminaUser' hidden>
-        </div>
-        
-        <!-- Modal footer -->
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-          <button type="button" class="btn btn-danger" data-dismiss="modal" onclick='ContinuaElimina()'>Eliminar</button>
-        </div>
-        
-      </div>
-    </div>
-  </div>
-</center>
+    
+        <!-- Page Content  -->
+         
      <!-- Control Sidebar -->
   <aside class="control-sidebar control-sidebar-dark">
     <!-- Control sidebar content goes here -->
