@@ -1,0 +1,2 @@
+En primera instancia debemos ingresar a nuestro manejador de BD en nuestro caso phpmyadmin y crearemos una base de datos con el nombre "tiempor" e importamos el script.sql anexado.
+
