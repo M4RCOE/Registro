@@ -3,10 +3,65 @@
   <br>
   <div>
 
+  <!-- Button trigger modal -->
+ 
+<style>
+.input {
+                position: relative;
+                font-size: 30px;
+                z-index: 1;
+                display: inline-block;
+                margin: 1em;
+                max-width: 350px;
+                height: 85px;
+                width: 85px;
+                vertical-align: top;
+                text-align: center;
+            }
+            .input:focus{
+              font-size: 30px;
+              text-align: center;
+                position: relative;
+                z-index: 1;
+                display: inline-block;
+                margin: 1em;
+                max-width: 350px;
+                vertical-align: top;
+                height: 100px;
+                width: 100px;
+            }
+
+
+</style>
+<!-- Modal -->
+<div class="modal fade bg-dark" id="modalnip" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl bg-dark">
+    <div class="modal-content bg-dark border-0">
+       <h1 class='text-center pt-5 pb-5 text-white'>Ingrese la Contraseña</h1><br><br> 
+      <div class="modal-body d-flex justify-content-center pt-6 mt-4" style='height:250px'>
+      <input type="text" id='pnameU' hidden>
+      <input type="text" id='pnameU2' hidden>
+       <input class='input text-muted' type="password" name="" id="pu1" maxlength="1" oninput='$("#pu2").focus()'>
+       <input class='input text-muted' type="password" name="" id="pu2" maxlength="1" oninput='$("#pu3").focus()'>
+       <input class='input text-muted' type="password" name="" id="pu3" maxlength="1" oninput='$("#pu4").focus()'>
+       <input class='input text-muted' type="password" name="" id="pu4" maxlength="1" oninput='Nip()'>
+            
+       
+       
+      </div>
+     <div style='height:95px'>
+     <center>
+       
+       <label class='h3 text-danger' data-bs-dismiss="modal">Cancelar</label>
+       </center>
+     </div>
+    </div>
+  </div>
+</div>
 
     <center>
 
-
+     
       <div class="container" style="width: 60%;">
         <table class="table table-hover " id="table">
 
@@ -43,8 +98,6 @@
               <script>
                 horas('<?php echo($u)?>')
                 dia('<?php echo($u)?>')
-
-
               </script>
               <span class="text-muted ml-1 mr-0"> Actual</span>
               <span id='time<?php echo($domain)?>'></span>
@@ -73,10 +126,11 @@
            </button>
            
            <?php
-          echo("<button style=' border-radius: 24px; padding:10px 20px; border: 2px solid darkslategray;' type='button' id='p".($domain)."' class='btn btn-success float-right mt-1 ' onclick=iniciar(this,0)> Iniciar</button>"); 
+          echo("<button style=' border-radius: 24px; padding:10px 20px; border: 2px solid darkslategray;' type='button' id='p".($domain)."' class='btn btn-success float-right mt-1 ' onclick=ini(this,0)> Iniciar</button>"); 
           
         ?>
 </div>
+ 
 
             <script>
               oculta('<?php echo($domain)?>')

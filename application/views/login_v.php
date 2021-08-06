@@ -23,12 +23,14 @@
 		</div>
 		<div class="row">
 		   <div class="col-md-12 login-from-row">
-		      <input name="nombre" type="text" placeholder="Usuario" required/>
+		   <input class=" border-0 text-center"   name="nombre" type="text" placeholder="Usuario" required style="width:230px; height:40px">
+		   <hr class="mt-0 pt-0" style="width:230px">
 		   </div>
 		</div>
 		<div class="row">
 		   <div class="col-md-12 login-from-row">
-		      <input name="cve" type="password" placeholder="Contraseña" required/>
+		   <input class=" border-0 text-center"   name="cve" type="password" placeholder="Contraseña" required style="width:230px;height:40px">
+		   <hr class="mt-0 pt-0" style="width:230px">
 		   </div>
 		</div>
 		<div class="row">

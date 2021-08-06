@@ -1,12 +1,23 @@
 var cronometro = {};
+function ini(nom, c){
+	padre=nom.parentNode.parentNode.parentNode
+	
+	 document.getElementById('pnameU').value=padre.childNodes[2].childNodes[0].innerText
+	 document.getElementById('pnameU2').value=nom.id
+	 document.getElementById('pnameU2').value=nom.id
+	$('#modalnip').modal('show');
+	$("#pu1").focus()
+}
+
 iniciar = function (nom, c) {
-	btn = document.getElementById(nom.id);
-	/* 	console.log("inicai " + nom.id); */
+	
+	btn = document.getElementById(nom);
+	 	 
 	let dif = new Date();
 	/* console.log(
 		"fecha" + dif.getHours() + ":" + dif.getMinutes() + ":" + dif.getSeconds()
 	); */
-	let str2 = nom.id.slice(1);
+	let str2 = nom.slice(1);
 	h = document.getElementById("horas2" + str2).value;
 	m = document.getElementById("minutos2" + str2).value;
 	s = document.getElementById("segundos2" + str2).value;
@@ -16,7 +27,7 @@ iniciar = function (nom, c) {
 		$('#bc'+str2).hide();
 		$('#p'+str2).show();
 		/* console.log("finalizo " + nom.id + " " + c); */
-		clearInterval(cronometro[nom.id]);
+		clearInterval(cronometro[nom]);
 		actualiza(str2);
 		document.getElementById("segundos2" + str2).value = 0;
 		document.getElementById("minutos2" + str2).value = 0;
@@ -38,7 +49,7 @@ iniciar = function (nom, c) {
 		}
 		var tiempo = new Date("2021", "07", "15", h, m, s);
 
-		cronometro[nom.id] = setInterval(() => {
+		cronometro[nom] = setInterval(() => {
 			tiempo = new Date(tiempo.getTime() + 1000);
 			document.getElementById("segundos2" + str2).value = tiempo.getSeconds();
 			document.getElementById("minutos2" + str2).value = tiempo.getMinutes();
@@ -103,7 +114,7 @@ horas = function (n) {
 		data: parametros,
 		success: function (r) {
 			n2 = n.split(" ", 1);
-
+			console.log('Horas: '+r)
 			if (r == 0) {
 				$("#sp" + n2).html("0 hrs 0 mn");
 
@@ -195,8 +206,8 @@ corriendo = function (n) {
 				document.getElementById("horas2" + n2).value = (tiempo3.getHours() - 18);
 				document.getElementById("minutos2" + n2).value = tiempo3.getMinutes();
 				document.getElementById("segundos2" + n2).value = tiempo3.getSeconds();
-				o = document.getElementById("p" + n2)
-				iniciar(o, 1)
+				o = document.getElementById("p" + n2).id
+				iniciar(o, 1,0)
 
 				//document.getElementById("c"+n2).value=1
 				localStorage.setItem("diaD" + n2, r.split("|")[1]);
@@ -240,5 +251,39 @@ function oculta(bt){
 	
 }
 
-
-
+function Nip(){
+	n=document.getElementById('pnameU').value
+	n2=document.getElementById('pnameU2').value
+	b=false
+	$.ajax({
+		url: "http://localhost:82/residencia/php/nip.php",
+		type: "POST",
+		data: {nom:n},
+		success: function (r) {
+			p=document.getElementById('pu1').value
+			p2=document.getElementById('pu2').value
+			p3=document.getElementById('pu3').value
+			p4=document.getElementById('pu4').value
+			nip=p+p2+p3+p4
+			data=JSON.parse(r)
+			 
+			if(data[0].clave==nip){
+				$('#modalnip').modal('hide');
+			p=document.getElementById('pu1').value=''
+			p2=document.getElementById('pu2').value=''
+			p3=document.getElementById('pu3').value=''
+			p4=document.getElementById('pu4').value=''
+				iniciar(n2,0)
+			} else{
+				p=document.getElementById('pu1').value=''
+				p2=document.getElementById('pu2').value=''
+				p3=document.getElementById('pu3').value=''
+				p4=document.getElementById('pu4').value=''
+				$("#pu1").focus()
+			}
+			
+		},
+	});
+	return b
+ 
+}

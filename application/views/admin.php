@@ -14,10 +14,9 @@
   <!-- Theme style -->
   <link rel="stylesheet" href="<?php echo base_url('dist/css/adminlte.min.css')?>">
   <link rel="stylesheet" href="<?php echo base_url('css/estilo.css')?>">
-  
-
-
-     
+  <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet"/>
+  <link rel='stylesheet' type='text/css' media='screen' href='fontawesome-free/css/all.min.css'>
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css" rel="stylesheet"/>
 
 
     <!-- Font Awesome JS -->
@@ -37,7 +36,101 @@
 </head>
  
 <body class="hold-transition sidebar-mini">
+
+<!--  <script>
+   function poneMenu(user){
+	  console.log('asignando '+user)
+	 $.ajax({
+		url: "http://localhost:82/residencia/php/asignaMenu.php",
+		data: { user:user },
+		type: "POST",
+		success: function (r) {
+			r2 = JSON.parse(r);
+			console.log(r2);
+		contenedor = document.getElementById("menusUser");
+	 	contenedor.innerHTML = "";  
+			for (i = 0; i < r2.length; i++) {
+        let li = document.createElement("li");
+        let ul = document.createElement("ul");
+        let a = document.createElement("a");
+        let p = document.createElement("p");
+        ul.className='nav nav-treeview'
+        ul.setAttribute('style','display: none;')
+        a.setAttribute('href',r2[i].Enlace);
+        a.setAttribute('target','_blank');
+        a.className='nav-link'
+        p.innerHTML=r2[i].Menu   
+        li.className='nav-item'     
+        a.appendChild(p)
+        li.appendChild(a)
  
+
+				if (r2[i].Nivel == 0) {
+     
+					contenedor.appendChild(li);
+					
+				} else if (r2[i].Nivel == 1) {
+        
+					c = contenedor.lastChild;
+          console.log(c)
+          console.log(r2[i].Menu+' '+c.tagName)
+          if(c.tagName=='UL'){
+            c.appendChild(li);
+          }else{
+            console.log('agrega UL')
+
+            ul.appendChild(li);
+            c.appendChild(ul);
+          }
+				
+           
+				} else if (r2[i].Nivel == 2) {
+					c = contenedor.lastChild;
+          
+					c2 = c.lastChild;
+					ol.appendChild(li);
+				 
+					c2.appendChild(ol);
+				} else if (r2[i].Nivel == 3) {
+					c = contenedor.lastChild;
+					c2 = c.lastChild;
+					c3 = c2.lastChild;
+					ol.appendChild(li);
+				 
+					c3.appendChild(ol);
+				} else if (r2[i].Nivel == 4) {
+					c = contenedor.lastChild;
+					c2 = c.lastChild;
+					c3 = c2.lastChild;
+					c4 = c3.lastChild;
+					ol.appendChild(li);
+				 
+					c3.appendChild(ol);
+				} else if (r2[i].Nivel == 5) {
+					c = contenedor.lastChild;
+					c2 = c.lastChild;
+					c3 = c2.lastChild;
+					c4 = c3.lastChild;
+					c5 = c4.lastChild;
+					ol.appendChild(li);
+			 
+					c3.appendChild(ol);
+				} else if (r2[i].Nivel == 6) {
+					c = contenedor.lastChild;
+					c2 = c.lastChild;
+					c3 = c2.lastChild;
+					c4 = c3.lastChild;
+					c5 = c4.lastChild;
+					c6 = c5.lastChild;
+					ol.appendChild(li);
+		 
+					c3.appendChild(ol);
+				}
+			}
+		},
+	});  
+}
+ </script> -->
 <div class="wrapper">
   <!-- Navbar -->
   <nav class="main-header navbar navbar-expand navbar-white navbar-light">
@@ -164,16 +257,37 @@
           <i class="fas fa-th-large"></i>
         </a>
       </li>
-      <li class="nav-item" onclick='cargaUser() '>
-        <a class="nav-link"  href="<?php echo site_url('Inicio/admin2')?>"  role="button">
-          
-        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-people-fill" viewBox="0 0 16 16">
-  <path d="M7 14s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1H7zm4-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
-  <path fill-rule="evenodd" d="M5.216 14A2.238 2.238 0 0 1 5 13c0-1.355.68-2.75 1.936-3.72A6.325 6.325 0 0 0 5 9c-4 0-5 3-5 4s1 1 1 1h4.216z"/>
-  <path d="M4.5 8a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5z"/>
-</svg>
+       
+
+      <!--  -->
+      <li class="nav-item dropdown">
+        <a class="nav-link" data-toggle="dropdown" href="#">
+        <i class="far fa-user"></i>
+           
         </a>
+        <div class="dropdown-menu dropdown-menu-md dropdown-menu-right" >
+          
+         <center>
+         <a class="nav-link"  href="<?php echo site_url('Inicio/admin2')?>"  role="button">
+         Usuarios 
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-people-fill" viewBox="0 0 16 16">
+            <path d="M7 14s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1H7zm4-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
+            <path fill-rule="evenodd" d="M5.216 14A2.238 2.238 0 0 1 5 13c0-1.355.68-2.75 1.936-3.72A6.325 6.325 0 0 0 5 9c-4 0-5 3-5 4s1 1 1 1h4.216z"/>
+            <path d="M4.5 8a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5z"/>
+          </svg>
+          </a>
+          <div class="dropdown-divider"></div>
+         
+          <a class="nav-link"  href="<?php echo site_url('Inicio/cierra_sesion')?>"  role="button">
+          Salir
+        <i class="fas fa-sign-out-alt"></i>
+        </a>
+         </center>  
+         
+           
+        </div>
       </li>
+      <!--  -->
        
     </ul>
   </nav>
@@ -182,43 +296,35 @@
   <!-- Main Sidebar Container -->
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
-    <a href="<?php echo site_url('Inicio')?>" class="brand-link">
-      <img src="<?php echo base_url('dist/img/AdminLTELogo.png')?>" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-      <span class="brand-text font-weight-light">  <?php
-            $user =$this->session->userdata('user');
-            $user = $user['nombre'];
-            $user = substr($user, 0,strpos($user,' '));
-            echo ucfirst($user);
-            ?></span>
-    </a>
-
+  
+  
     <!-- Sidebar -->
     <div class="sidebar">
       <!-- Sidebar user panel (optional) -->
       <div class="user-panel mt-3 pb-3 mb-3 d-flex">
         <div class="image">
-          <img src="<?php echo base_url('dist/img/user2-160x160.jpg')?>" class="img-circle elevation-2" alt="User Image">
+          <img src="<?php echo base_url($user =$this->session->userdata('user')['img_user'])?>" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
           <a href="#" class="d-block">  <?php
-            $user =$this->session->userdata('user');
-            $user = $user['nombre'];
-            $user = substr($user, 0,strpos($user,' '));
+          $user =$this->session->userdata('user');
+          $user = $user['nombre'];
             echo ucfirst($user);
             ?></a>
         </div>
       </div>
 
       <!-- SidebarSearch Form -->
-      <div class="form-inline">
-        <div class="input-group" data-widget="sidebar-search">
-          <input class="form-control form-control-sidebar" type="search" placeholder="Search" aria-label="Search">
-          <div class="input-group-append">
-            <button class="btn btn-sidebar">
-              <i class="fas fa-search fa-fw"></i>
-            </button>
-          </div>
-        </div>
+      <div  class='pl-0 ml-0'>
+      <ul  id='menusUser'class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+
+      
+      </ul>
+       <script>
+         poneMenu('<?php echo ($user);?>')
+       </script>
+
+       
       </div>
 
       <!-- Sidebar Menu -->
@@ -308,6 +414,8 @@
                
             </ul>
 
+             
+</select>
         </nav>
         <div id="content2">
         <div class="alert alert-success text-center" id='alerta1' hidden role='alert'>
@@ -446,7 +554,7 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Modifica Url</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Modifica menu</h5>
          
       </div>
       <div class="modal-body ">
@@ -454,14 +562,66 @@
         <label >Url</label><br>
        <input class='text-center' type="text" id='MUrl' placecholder='url'><br><br>
        <label >Texto enlace</label><br>
-       <input class='text-center' type="text" id='MtxtUrl'placecholder='Texto enlace'>
+       <input class='text-center' type="text" id='MtxtUrl'placecholder='Texto enlace'><br><br>
+       <label >Icono</label><br>
        <input class='text-center' type="text" id='MtxtUrl2'hidden>
        <input class='text-center' type="text" id='Mid'hidden>
+
+       
+<style>
+  .FontAwesomeSelect {
+font-family: FontAwesome;
+font-size: 18px;
+}
+</style>
+
+<select class='FontAwesomeSelect' id='icon'>
+ 
+		<option value='fas fa-home'>&#xf015; home</option>
+		<option value='fab fa-leanpub'>&#xf212; limpieza</option>
+		<option value='fas fa-couch'>&#xf4b8; muebles</option>
+		<option value='fas fa-file-video'>&#xf1c8; video</option>
+		<option value='fas fa-dumbbell'>&#xf44b; deporte</option>
+		<option value='fa-automobile'>&#xf1b9; fa-automobile</option>
+		<option value='fa-backward'>&#xf04a; fa-backward</option>
+		<option value='fa-balance-scale'>&#xf24e; fa-balance-scale</option>
+		<option value='fa-ban'>&#xf05e; fa-ban</option>
+		<option value='fa-bandcamp'>&#xf2d5; fa-bandcamp</option>
+		<option value='fa-bank'>&#xf19c; fa-bank</option>
+		<option value='fa-bar-chart'>&#xf080; fa-bar-chart</option>
+		<option value='fa-bar-chart-o'>&#xf080; fa-bar-chart-o</option>
+		<option value='fa-barcode'>&#xf02a; fa-barcode</option>
+		<option value='fa-bars'>&#xf0c9; fa-bars</option>
+		<option value='fa-bath'>&#xf2cd; fa-bath</option>
+		<option value='fa-bathtub'>&#xf2cd; fa-bathtub</option>
+		<option value='fa-battery'>&#xf240; fa-battery</option>
+		<option value='fa-battery-0'>&#xf244; fa-battery-0</option>
+		<option value='fa-battery-1'>&#xf243; fa-battery-1</option>
+		<option value='fa-battery-2'>&#xf242; fa-battery-2</option>
+		<option value='fa-battery-3'>&#xf241; fa-battery-3</option>
+		<option value='fa-battery-4'>&#xf240; fa-battery-4</option>
+		<option value='fa-battery-empty'>&#xf244; fa-battery-empty</option>
+		<option value='fa-battery-full'>&#xf240; fa-battery-full</option>
+		<option value='fa-battery-half'>&#xf242; fa-battery-half</option>
+		<option value='fa-battery-quarter'>&#xf243; fa-battery-quarter</option>
+		<option value='fa-battery-three-quarters'>&#xf241; fa-battery-three-quarters</option>
+		<option value='fa-bed'>&#xf236; fa-bed</option>
+		<option value='fa-beer'>&#xf0fc; fa-beer</option>
+		<option value='fa-behance'>&#xf1b4; fa-behance</option>
+		<option value='fa-behance-square'>&#xf1b5; fa-behance-square</option>
+		<option value='fa-bell'>&#xf0f3; fa-bell</option>
+		<option value='fa-bell-o'>&#xf0a2; fa-bell-o</option>
+		<option value='fa-bell-slash'>&#xf1f6; fa-bell-slash</option>
+		<option value='fa-bell-slash-o'>&#xf1f7; fa-bell-slash-o</option>
+		<option value='fa-bicycle'>&#xf206; fa-bicycle</option>
+		<option value='fa-binoculars'>&#xf1e5; fa-binoculars</option>
+
+</select>
         </center>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-        <button type="button" class="btn btn-primary" data-dismiss="modal"onclick='guarda_url(contenedor)'>guardar</button>
+        <button id ='<?php echo($user)?>'type="button" class="btn btn-primary" data-dismiss="modal"onclick='guarda_url(this)'>guardar</button>
       </div>
     </div>
   </div>

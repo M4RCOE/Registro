@@ -22,17 +22,17 @@ class Inicio extends CI_Controller {
 	public function valida(){
 		$nombre = $this->input->post('nombre');
 		$cve = $this->input->post('cve');
-		$user = $this->Mi_model->get_usuario($nombre,$cve);
+		
+	$user = $this->Mi_model->get_usuario($nombre,$cve);
 
-		if ( $user ){
+		 if ( $user ){
 			$this->session->set_userdata('user',$user);
 			$this->load->view('admin');
 		   
 		} else
 		{
 			redirect('/');
-		}
-
+		}  
    }
    public function cierra_sesion(){
 		$this->session->sess_destroy();
@@ -42,10 +42,19 @@ class Inicio extends CI_Controller {
 	$this->load->view('login_v');
 }
    public function admin(){
-	$this->load->view('admin');
+	
+	if ($this->session->userdata('user')) {
+		$this->load->view('admin');
+  } else {
+	redirect('/');
+  }  
 }
    public function admin2(){
-	$this->load->view('admin2');
+	if ($this->session->userdata('user')) {
+		$this->load->view('admin2');
+  } else {
+	redirect('/');
+  } 
 }
   
 	 

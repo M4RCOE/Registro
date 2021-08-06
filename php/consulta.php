@@ -3,7 +3,7 @@ include ("conecta.php");
  
  
     $pdo = connect();
-    $sql = "SELECT nomMenu,id from app_menu";
+    $sql = "SELECT nomMenu,idM,usuario from app_menu";
     $query = $pdo->prepare($sql);
     $query->execute();
     $list = $query->fetchAll();

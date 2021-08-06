@@ -1,19 +1,23 @@
-cargaUser()
-function cargaUser() {
-	
+/*cargaUser()
+ function cargaUser() {
+	 
 	$.ajax({
 		url: "http://localhost:82/residencia/php/users.php",
 		success: function (r) {
 			t = document.getElementById("tuser");
 	 
-			t.innerHTML = "";
+		  
+			 
 			r2 = JSON.parse(r);
+			console.log('User '+t)
 			for (i = 0; i < r2.length; i++) {
 				let div = document.createElement("select");
 				div.className = "selectpicker";
 				let tr = document.createElement("tr");
 				let td = document.createElement("td");
 				let td2 = document.createElement("td");
+				let td3 = document.createElement("td");
+				let td4 = document.createElement("td");
 				let btn = document.createElement("button");
 				let btn2 = document.createElement("button");
 				let img = document.createElement("img");
@@ -35,67 +39,298 @@ function cargaUser() {
 				
 				td.innerHTML = r2[i].nomCom;
 				td.id = r2[i].id+'-'+r2[i].nombre;
+				td3.innerHTML = r2[i].Correo;
+				td4.innerHTML = r2[i].nombre;
 				td.className='pl-5 pt-3'
 				tr.appendChild(td);
+				tr.appendChild(td4);
+				tr.appendChild(td3);
 				tr.appendChild(td2); 
 				t.appendChild(tr);
 			}
+			
+
 		},
 	});
 	 
+	//
+	$(document).ready( function () {
+		$('#myTable').DataTable();
+	} );
+	//
+	
+} */
+
+function userclick() {
+	let padre = this.parentNode.parentNode;
+	let hijo = padre.childNodes[1];
+	let temp = hijo.id;
+	array = temp.split("-");
+ 
+	nombre = hijo.innerText;
+	alias = array[1];
+	id = array[0];
+	correo=array[2];
+	document.getElementById("Nommue").value = nombre;
+	document.getElementById("Alimue").value = alias;
+	document.getElementById("idmue").value = id;
+	document.getElementById("Corrmue").value = correo;
+$("#ModalUsersE").modal("show");
+	console.log("id " + id + " nom " + nombre + " alias " + alias);
+	 
+
+	 
+}
+
+
+function editUser() {
+/* 	console.log("editUser");
+	let nom = document.getElementById("Nommue").value;
+	let ali = document.getElementById("Alimue").value;
+	 
+	let id = document.getElementById("idmue").value;
+	let email = document.getElementById("Corrmue").value;
+	m = menu.value;
+	console.log("nom: " + nom + " alias: " + ali + " menu: " + menu+" email "+email); */
+	
+
+		let nom=$("#Nommue")[0].value 
+		let alias=$("#Alimue")[0].value 
+		let email=$("#Corrmue")[0].value 
+		let id=$("#idmue")[0].value 
+		let img=$("#imgU")[0].files[0]
+		document.getElementById("alerta2").innerHTML =
+		'Actualización del usuario "<strong>' + nom + '</strong>" exitosa';
+		console.log("nom: " + nom + " alias: " + alias +" email "+email);
+		let formData=new FormData()
+		formData.append('nombre',nom)
+		formData.append('alias',alias)
+		formData.append('email',email)
+		formData.append('id',id)
+		formData.append('file',img)
+	 
+	$.ajax({
+		url: "http://localhost:82/residencia/php/actualizaUC.php",
+		type: "POST",
+		contentType:false,
+		processData:false,
+		data: formData,
+		success: function (r) {
+			console.log(r);
+			cargaUser();
+	poneMenu(alias);
+		},
+	});
 	
 }
 
-function userclick(){
-	let padre=this.parentNode.parentNode
-	let hijo=padre.childNodes[0]
-	let temp=hijo.id
-	array=temp.split('-')
-	  
-	nombre=hijo.innerText
-	alias=array[1]
-	id=array[0]
- 	document.getElementById('Nommue').value=nombre
-	document.getElementById('Alimue').value=alias  
-	document.getElementById('idmue').value=id  
+function eliminaUser() {
+	
+	let padre = this.parentNode.parentNode;
+	let hijo = padre.childNodes[1];
+	let temp = hijo.id;
+ 
+	array = temp.split("-");
+	$("#ModalEliminaU").modal("show");
+	conten = document.getElementById("MeUser");
+	inp = document.getElementById("EliminaUser");
+	sp = document.getElementById("EUc");
+	inp.value = array[0] + "-" + hijo.innerText;
+	sp.innerHTML = hijo.innerText;
+	 
+	 
+}
 
-	console.log('id '+id+' nom '+nombre+' alias '+alias)
+function ContinuaElimina() {
+	inp = document.getElementById("EliminaUser").value;
+	array = inp.split("-");
+	document.getElementById("alerta3").innerHTML =
+		'Acaba de eliminar al usuario "<strong>' + array[1] + '</strong>" ';
+
 	$.ajax({
-		url: "http://localhost:82/residencia/php/consulta.php",
+		url: "http://localhost:82/residencia/php/EliminaUser.php",
+		type: "POST",
+		data: { id: array[0] },
 		success: function (r) {
-			r2 = JSON.parse(r);
-			
-			contenedor = document.getElementById("MUserA");
-			contenedor.innerHTML=''
-			for (i = 0; i < r2.length; i++) {
-				 
-				let a = document.createElement("option");
-				a.innerHTML = r2[i].nomMenu;
-				a.id = r2[i].id;
-				contenedor.appendChild(a);
-			}
-			$('#ModalUsersE').modal('show');
+			console.log(r);
+			document.getElementById("alerta3").removeAttribute("hidden");
+			cargaUser();
+			$(document).ready(function () {
+				window.setTimeout(function () {
+					$("#alerta3")
+						.fadeTo(500, 0)
+						.slideUp(1000, function () {
+							$(this)[0].setAttribute("hidden", true);
+							$(this).fadeTo(500, 100);
+						});
+				}, 2000);
+			});
 		},
 	});
 }
 
-function editUser(){
-	console.log('editUser')
-	let nom=document.getElementById('Nommue').value 
-	let ali=document.getElementById('Alimue').value  
-	let menu=document.getElementById('MUserA').value 
-	let id=document.getElementById('idmue').value   
-	m=menu.value
-	console.log('nom: '+nom+' alias: '+ali+' menu: '+menu)
-	document.getElementById("alerta2").innerHTML =
-	'Actualización del usuario "<strong>' + nom + '</strong>" exitosa';
+function agregarUserM() {
+	$("#ModalUsersA").modal("show");
+}
+function agregarUser() {
 
+
+		let nom=$("#nombreI")[0].value 
+		let alias=$("#aliasI")[0].value 
+		let email=$("#correoI")[0].value 
+		let cve=$("#claveI")[0].value 
+		let img=$("#imgU")[0].files[0]
+
+		let formData=new FormData()
+		formData.append('nombre',nom)
+		formData.append('alias',alias)
+		formData.append('email',email)
+		formData.append('cve',cve)
+		formData.append('file',img)
+		document.getElementById("alerta2").innerHTML =
+		'Se Agrego al Usuario "'+nom+'" correctamente';
+	 
+	$.ajax({
+		url: "http://localhost:82/residencia/php/InsertaUC.php",
+		type: "POST",
+		contentType:false,
+		processData:false,
+		data:formData,
+		success: function (r) {
+			console.log(r);
+			cargaUser();
+			document.getElementById("alerta2").removeAttribute("hidden");
+			$(document).ready(function () {
+				window.setTimeout(function () {
+					$("#alerta2")
+						.fadeTo(500, 0)
+						.slideUp(1000, function () {
+							$(this)[0].setAttribute("hidden", true);
+							$(this).fadeTo(500, 100);
+						});
+				}, 2000);
+			});
+		},
+	});
+}
+
+function poneMenu(user) {
+	console.log("asignando " + user);
+	$.ajax({
+		url: "http://localhost:82/residencia/php/asignaMenu.php",
+		data: { user: user },
+		type: "POST",
+		success: function (r) {
+			r2 = JSON.parse(r);
+			console.log( r2);
+			contenedor = document.getElementById("menusUser");
+			contenedor.innerHTML = "";
+			for (i = 0; i < r2.length; i++) {
+				let li = document.createElement("li");
+				let ul = document.createElement("ul");
+				let a = document.createElement("a");
+				let p = document.createElement("p");
+				let ic = document.createElement("i");
+				let ic2 = document.createElement("i");
+				 ic2.className='fas fa-angle-down '
+				ic.className = r2[i].Icono;
+				 
+				ul.className = "nav nav-treeview";
+				ul.setAttribute("style", "display: none;");
+				a.setAttribute("href", r2[i].Enlace);
+				a.setAttribute("target", "_blank");
+				a.className = "nav-link";
+				a.appendChild(ic)
+				p.innerHTML = r2[i].Menu+"  ";
+				p.className='pl-2'
+				li.className = "nav-item";
+				
+				a.appendChild(p);
+				li.appendChild(a);
+				
+				if (r2[i].Nivel == 0) {
+					if(r2[i+1].Nivel != 0){
+					p.appendChild(ic2)
+					}
+					
+					contenedor.appendChild(li);
+				} else if (r2[i].Nivel == 1) {
+					c = contenedor.lastChild;
+				 
+					if (c.tagName == "UL") {
+						c.appendChild(li);
+					} else {
+						 
+							ul.appendChild(li);
+							c.appendChild(ul);
+					 
+					
+						
+					}
+				} else if (r2[i].Nivel == 2) {
+					c = contenedor.lastChild;
+
+					c2 = c.lastChild;
+					ol.appendChild(li);
+
+					c2.appendChild(ol);
+				} else if (r2[i].Nivel == 3) {
+					c = contenedor.lastChild;
+					c2 = c.lastChild;
+					c3 = c2.lastChild;
+					ol.appendChild(li);
+
+					c3.appendChild(ol);
+				} else if (r2[i].Nivel == 4) {
+					c = contenedor.lastChild;
+					c2 = c.lastChild;
+					c3 = c2.lastChild;
+					c4 = c3.lastChild;
+					ol.appendChild(li);
+
+					c3.appendChild(ol);
+				} else if (r2[i].Nivel == 5) {
+					c = contenedor.lastChild;
+					c2 = c.lastChild;
+					c3 = c2.lastChild;
+					c4 = c3.lastChild;
+					c5 = c4.lastChild;
+					ol.appendChild(li);
+
+					c3.appendChild(ol);
+				} else if (r2[i].Nivel == 6) {
+					c = contenedor.lastChild;
+					c2 = c.lastChild;
+					c3 = c2.lastChild;
+					c4 = c3.lastChild;
+					c5 = c4.lastChild;
+					c6 = c5.lastChild;
+					ol.appendChild(li);
+
+					c3.appendChild(ol);
+				}
+			}
+		},
+	});
+}
+
+function menuF(obj,user){
+	let menu =obj.value
+	let padre = obj.parentNode.parentNode;
+	let hijo = padre.childNodes[1];
+	let temp = hijo.id;
+	array = temp.split("-");
+ 
+	nombre = hijo.innerText;
+	 
+	 
+	document.getElementById("alerta2").innerHTML =
+	'Se asigno el menu  "<strong>' + menu + '</strong>"al usuario "<strong>' + nombre + '</strong>"  ';
 	$.ajax({
 		url: "http://localhost:82/residencia/php/menuUser.php",
 		type: "POST",
-		data: { nombre: nom, menu: menu },
+		data: { nombre: nombre, menu: menu },
 		success: function (r) {
-			 
 			console.log(r);
 			document.getElementById("alerta2").removeAttribute("hidden");
 			$(document).ready(function () {
@@ -103,70 +338,15 @@ function editUser(){
 					$("#alerta2")
 						.fadeTo(500, 0)
 						.slideUp(1000, function () {
-							$(this)[0].setAttribute('hidden',true);
-							$(this).fadeTo(500,100);
+							$(this)[0].setAttribute("hidden", true);
+							$(this).fadeTo(500, 100);
 						});
 				}, 2000);
 			});
+			console.log('usuario ->'+user+' menu ->'+menu)
+	poneMenu(user)
 		},
 	});
-	$.ajax({
-		url: "http://localhost:82/residencia/php/actualizaUser.php",
-		type: "POST",
-		data: { nombre: nom, alias: ali,id:id },
-		success: function (r) {
-			console.log(r);
-			 
-		},
-	});
-	cargaUser()
-}
-
-function eliminaUser(){
-	let padre=this.parentNode.parentNode
-	let hijo=padre.childNodes[0]
-	let temp=hijo.id
-	array=temp.split('-')
-	$('#ModalEliminaU').modal('show');
-	conten=document.getElementById('MeUser')
-	inp=document.getElementById('EliminaUser')
-	inp.value=array[0]+'-'+hijo.innerText
-	let sp = document.createElement("span");
-	sp.className='text-danger'
-	let sp2 = document.createElement("span");
-	let br = document.createElement("br");
-	sp.innerHTML='Esta a punto de eliminar al usuario '
-	sp2.innerHTML=hijo.innerText
-	conten.appendChild(sp)
-	conten.appendChild(br)
-	conten.appendChild(sp2)
 	
-}
 
-function ContinuaElimina(){
-	inp=document.getElementById('EliminaUser').value
-	array=inp.split('-')
-	document.getElementById("alerta3").innerHTML =
-	'Acaba de eliminar al usuario "<strong>' + array[1] + '</strong>" ';
-
-	$.ajax({
-		url: "http://localhost:82/residencia/php/EliminaUser.php",
-		type: "POST",
-		data: { id: array[0]  },
-		success: function (r) {
-			console.log(r);
-			document.getElementById("alerta3").removeAttribute("hidden");
-			cargaUser() 
-			$(document).ready(function () {
-				window.setTimeout(function () {
-					$("#alerta3")
-						.fadeTo(500, 0)
-						.slideUp(1000, function () {
-							$(this)[0].setAttribute('hidden',true);
-							$(this).fadeTo(500,100);
-						});
-				}, 2000);
-			});
-		},
-	});
 }

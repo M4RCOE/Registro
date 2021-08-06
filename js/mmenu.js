@@ -6,12 +6,14 @@ function Cmenu() {
 			r2 = JSON.parse(r);
 
 			contenedor = document.getElementById("cmenu");
-			contenedor.innerHTML = "";
+			if (contenedor.innerHTML != "") {
+				contenedor.innerHTML = "";
+			}
 			for (i = 0; i < r2.length; i++) {
 				let a = document.createElement("a");
 				a.className = "dropdown-item";
 				a.innerHTML = r2[i].nomMenu;
-				a.id = r2[i].id;
+				a.id = r2[i].idM;
 				a.addEventListener("click", menuclick, false);
 
 				contenedor.appendChild(a);
@@ -57,15 +59,22 @@ function menuclick() {
 				let div = document.createElement("div");
 				let ol = document.createElement("ol");
 				let br = document.createElement("br");
+				let br2 = document.createElement("br");
 				let span = document.createElement("span");
+				let span2 = document.createElement("span");
+				span2.id='sp12-m'
+				span2.innerHTML = r2[i].Icono;
 				span.innerHTML = r2[i].Enlace;
-				console.log('enlace: '+r2[i][3])
+				console.log("enlace: " + r2[i][3]);
 				span.className = "text-muted";
+				span2.className = "text-light";
 				span.style = "font-size: 12px";
 				div.innerHTML = r2[i].Menu;
 				div.addEventListener("click", divmenu, false);
-				div.appendChild(br)
-				div.appendChild(span)
+				div.appendChild(br);
+				div.appendChild(span);
+				div.appendChild(br2);
+				div.appendChild(span2);
 				li.appendChild(div);
 
 				/* console.log(r2[i].Menu+" "+r2[i].Nivel) */
@@ -146,8 +155,8 @@ function agrega_menu() {
 					$("#alerta1")
 						.fadeTo(500, 0)
 						.slideUp(1000, function () {
-							$(this)[0].setAttribute('hidden',true);
-							$(this).fadeTo(500,100);
+							$(this)[0].setAttribute("hidden", true);
+							$(this).fadeTo(500, 100);
 						});
 				}, 2000);
 			});
@@ -161,31 +170,33 @@ function niveles() {
 	h = $("#contenedor").find("li");
 
 	for (ñ = 0; ñ < h.length; ñ++) {
+		temp = h[ñ].innerText.split("\n");
 		if (h[ñ].parentNode.id == "contenedor") {
-			temp = h[ñ].innerText.split("\n");
-			hijos.push([temp[0], 0]);
+			
+			hijos.push([temp[0], 0,temp[1]]);
 		} else if (
 			h[ñ].parentNode.id == 1 ||
 			h[ñ].parentNode.parentNode.parentNode.id == "contenedor"
 		) {
-			hijos.push([h[ñ].innerText, 1]);
+			 
+			hijos.push([temp[0], 1,temp[1]]);
 		} else if (
 			h[ñ].parentNode.id == 2 ||
 			h[ñ].parentNode.parentNode.parentNode.parentNode.id == "contenedor"
 		) {
-			hijos.push([h[ñ].innerText, 2]);
+			hijos.push([temp[0], 2,temp[1]]);
 		} else if (
 			h[ñ].parentNode.id == 3 ||
 			h[ñ].parentNode.parentNode.parentNode.parentNode.parentNode.id ==
 				"contenedor"
 		) {
-			hijos.push([h[ñ].innerText, 3]);
+			hijos.push([temp[0], 3,temp[1]]);
 		} else if (
 			h[ñ].parentNode.id == 4 ||
 			h[ñ].parentNode.parentNode.parentNode.parentNode.parentNode.parentNode
 				.id == "contenedor"
 		) {
-			hijos.push([h[ñ].innerText, 4]);
+			hijos.push([temp[0], 4,temp[1]]);
 		}
 	}
 
@@ -206,7 +217,7 @@ function niveles() {
 function insertaM(hijos, id) {
 	men = document.getElementById("menuS").innerText;
 	document.getElementById("alerta1").innerHTML =
-		'Se Cargaron los elementos sel menu "<strong>' +
+		'Se Cargaron los elementos del menu "<strong>' +
 		men +
 		'</strong>" correctamente';
 	document.getElementById("alerta1").removeAttribute("hidden");
@@ -221,11 +232,12 @@ function insertaM(hijos, id) {
 					$("#alerta1")
 						.fadeTo(500, 0)
 						.slideUp(1000, function () {
-							$(this)[0].setAttribute('hidden',true);
-							$(this).fadeTo(500,100);
+							$(this)[0].setAttribute("hidden", true);
+							$(this).fadeTo(500, 100);
 						});
 				}, 2000);
 			});
+			poneMenu()
 		},
 	});
 }
@@ -243,44 +255,45 @@ function onKeyUp2(event) {
 	}
 }
 
-
-function divmenu(){
-	this.innerText
-	temp =this.innerText.split("\n");
+function divmenu() {
+	this.innerText;
+	temp = this.innerText.split("\n");
+	console.log(temp)
+	document.getElementById("MUrl").value = temp[1];
+	document.getElementById("MtxtUrl").value = temp[0];
+	document.getElementById("MtxtUrl2").value = temp[0];
+	 console.log(temp)
 	
-	document.getElementById("MUrl").value =temp[1]
-	document.getElementById("MtxtUrl").value =temp[0]
-	document.getElementById("MtxtUrl2").value =temp[0]
-	document.getElementById("Mid").value =document.getElementById("menuS2").innerText 
-	$('#modalUrl').modal('show');
+	
+	document.getElementById("Mid").value =
+		document.getElementById("menuS2").innerText;
+	$("#modalUrl").modal("show");
+}
 
+function guarda_url(o) {
+	 
+	url = document.getElementById("MUrl").value;
+	txt = document.getElementById("MtxtUrl").value;
+	txt2 = document.getElementById("MtxtUrl2").value;
+	id = document.getElementById("Mid").value;
+	icon = document.getElementById("icon").value;
+ 
+	$.ajax({
+		url: "http://localhost:82/residencia/php/actualizaDiv.php",
+		data: { id: id, txt: txt, url: url, txt2: txt2, icon: icon },
+		type: "POST",
+		success: function (r) {
+			poneMenu(o.id)
+			recargam(id);  
+		},
+	});
 	 
 }
 
-function guarda_url(o){
-	obj=o.childNodes
-
-	url=document.getElementById("MUrl").value  
-	txt=document.getElementById("MtxtUrl").value 
-	txt2=document.getElementById("MtxtUrl2").value 
-	id=document.getElementById("Mid").value 
-	$.ajax({
-		url: "http://localhost:82/residencia/php/actualizaDiv.php",
-		data: { id:id,txt:txt,url:url,txt2:txt2 },
-		type: "POST",
-		success: function (r) {
-			console.log(r)
-		 
-
-			recargam(id)
-		},
-	});
-}
-
-function recargam(id){
+function recargam(id) {
 	$.ajax({
 		url: "http://localhost:82/residencia/php/consulta2.php",
-		data: { id:id },
+		data: { id: id },
 		type: "POST",
 		success: function (r) {
 			r2 = JSON.parse(r);
@@ -292,15 +305,22 @@ function recargam(id){
 				let div = document.createElement("div");
 				let ol = document.createElement("ol");
 				let br = document.createElement("br");
+				let br2 = document.createElement("br");
 				let span = document.createElement("span");
+				let span2 = document.createElement("span");
+				span2.id='sp12-m'
+				span2.innerHTML = r2[i].Icono;
 				span.innerHTML = r2[i].Enlace;
-				console.log('enlace: '+r2[i][3])
+				console.log("enlace: " + r2[i][3]);
 				span.className = "text-muted";
+				span2.setAttribute('hidden',true)
 				span.style = "font-size: 12px";
 				div.innerHTML = r2[i].Menu;
 				div.addEventListener("click", divmenu, false);
-				div.appendChild(br)
-				div.appendChild(span)
+				div.appendChild(br);
+				div.appendChild(span);
+				div.appendChild(br2);
+				div.appendChild(span2);
 				li.appendChild(div);
 
 				/* console.log(r2[i].Menu+" "+r2[i].Nivel) */
@@ -357,4 +377,100 @@ function recargam(id){
 		},
 	});
 }
- 
+
+function poneMenu(user) {
+	console.log("asignando " + user);
+	$.ajax({
+		url: "http://localhost:82/residencia/php/asignaMenu.php",
+		data: { user: user },
+		type: "POST",
+		success: function (r) {
+			r2 = JSON.parse(r);
+			console.log(r2);
+			contenedor = document.getElementById("menusUser");
+				contenedor.innerHTML = "";
+			for (i = 0; i < r2.length; i++) {
+				let li = document.createElement("li");
+				let ul = document.createElement("ul");
+				let a = document.createElement("a");
+				let p = document.createElement("p");
+				let ic = document.createElement("i");
+				let ic2 = document.createElement("i");
+				ic2.className='fas fa-angle-down '
+
+				ic.className = r2[i].Icono;
+				ul.className = "nav nav-treeview";
+				ul.setAttribute("style", "display: none;");
+				a.setAttribute("href", r2[i].Enlace);
+				a.setAttribute("target", "_blank");
+				a.className = "nav-link";
+				p.innerHTML = r2[i].Menu +"  ";
+				p.className = "pl-2";
+				li.className = "nav-item";
+				a.appendChild(ic);
+				a.appendChild(p);
+				li.appendChild(a);
+
+				if (r2[i].Nivel == 0) {
+					if(r2[i+1].Nivel != 0){
+						p.appendChild(ic2)
+						}
+					contenedor.appendChild(li);
+				} else if (r2[i].Nivel == 1) {
+					c = contenedor.lastChild;
+					console.log(c);
+					console.log(r2[i].Menu + " " + c.tagName);
+					if (c.tagName == "UL") {
+						c.appendChild(li);
+					} else {
+						console.log("agrega UL");
+
+						ul.appendChild(li);
+						c.appendChild(ul);
+					}
+				} else if (r2[i].Nivel == 2) {
+					c = contenedor.lastChild;
+
+					c2 = c.lastChild;
+					ol.appendChild(li);
+
+					c2.appendChild(ol);
+				} else if (r2[i].Nivel == 3) {
+					c = contenedor.lastChild;
+					c2 = c.lastChild;
+					c3 = c2.lastChild;
+					ol.appendChild(li);
+
+					c3.appendChild(ol);
+				} else if (r2[i].Nivel == 4) {
+					c = contenedor.lastChild;
+					c2 = c.lastChild;
+					c3 = c2.lastChild;
+					c4 = c3.lastChild;
+					ol.appendChild(li);
+
+					c3.appendChild(ol);
+				} else if (r2[i].Nivel == 5) {
+					c = contenedor.lastChild;
+					c2 = c.lastChild;
+					c3 = c2.lastChild;
+					c4 = c3.lastChild;
+					c5 = c4.lastChild;
+					ol.appendChild(li);
+
+					c3.appendChild(ol);
+				} else if (r2[i].Nivel == 6) {
+					c = contenedor.lastChild;
+					c2 = c.lastChild;
+					c3 = c2.lastChild;
+					c4 = c3.lastChild;
+					c5 = c4.lastChild;
+					c6 = c5.lastChild;
+					ol.appendChild(li);
+
+					c3.appendChild(ol);
+				}
+			}
+		},
+	});
+}
