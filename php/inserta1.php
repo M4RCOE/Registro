@@ -4,18 +4,19 @@ include ("conecta.php");
 
 	
 try {
-	 foreach($_POST['nombre'] as $key => $use){
-	$sql = "INSERT INTO app_menudetalle (Menu, idM, Nivel,Enlace,Icono) VALUES (:Menu,:idM,:Nivel,:Enlace,:Icono)";
+	 foreach($_POST['hijos'] as $key => $use){
+	$sql = "INSERT INTO app_menudetalle (Menu, idM,Enlace,Icono,Nivel) VALUES ('".$use[0]."',".$_POST['id'].",'".$use[2]."','".$use[3]."',".$use[1].")";
 	$query = $pdo->prepare($sql);
-	$query->bindParam(':Menu', $use[0], PDO::PARAM_STR);
-	$query->bindParam(':idM', $_POST['id'], PDO::PARAM_STR);
-	$query->bindParam(':Nivel', $use[1], PDO::PARAM_STR); 
-	$query->bindParam(':Elace', $use[2], PDO::PARAM_STR); 
-	$query->bindParam(':Icono', $use[3], PDO::PARAM_STR); 
 	$query->execute();
 	}
+	$sql2 = "select nombre from  user_control where nomCom =(select Usuario from app_menu where idM=".$_POST['id'].")";
+	$query = $pdo->prepare($sql2);
+	$query->execute();
+	$list = $query->fetchAll();
+    foreach ($list as $rs) {
+		echo($rs['nombre']);
+   }
 	
-	//echo('nombre: '.$_POST['nombre'].'idM: '.$_POST['id'].'Nivel: '.$_POST['pos'] );
 } catch (PDOException $e) {
 	echo 'PDOException : '.  $e->getMessage();
 	

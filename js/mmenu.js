@@ -34,13 +34,18 @@ function agrega() {
 	let div = document.createElement("div");
 	let br = document.createElement("br");
 	let span = document.createElement("span");
+	let br2 = document.createElement("br");
+	let span2 = document.createElement("span");
 	span.innerHTML = url;
+	span2.innerHTML = 'fas fa-home';
 	span.className = "text-muted";
 	span.style = "font-size: 12px";
 	div.innerHTML = txturl;
 
 	div.appendChild(br);
 	div.appendChild(span);
+	div.appendChild(br2);
+	div.appendChild(span2);
 	li.appendChild(div);
 
 	contenedor.appendChild(li);
@@ -178,30 +183,31 @@ function niveles() {
 		
 	for (ñ = 0; ñ < h.length; ñ++) {
 		temp = h[ñ].innerText.split("\n");
-		  
+		temp1=h[ñ].childNodes[0].childNodes[2].innerText
+		temp2=h[ñ].childNodes[0].childNodes[4].innerText
 		
 		if (h[ñ].parentNode.id == "contenedor") {
 			
-			hijos.push([temp[0], 0,temp[1],temp[2]]);
+			hijos.push([temp[0], 0,temp1,temp2]);
 
 		} else if (h[ñ].parentNode.id == 1 ||h[ñ].parentNode.parentNode.parentNode.id == "contenedor") {
 			  
-			hijos.push([temp[0], 1,temp[1],temp[2]]);
+			hijos.push([temp[0], 1,temp1,temp2]);
 
 		} else if (h[ñ].parentNode.id == 2 ||h[ñ].parentNode.parentNode.parentNode.parentNode.id == "contenedor") {
 
-			hijos.push([temp[0], 2,temp[1],temp[2]]);
+			hijos.push([temp[0], 2,temp1,temp2]);
 
 		} else if (h[ñ].parentNode.id == 3 ||h[ñ].parentNode.parentNode.parentNode.parentNode.parentNode.id =="contenedor") {
 			
-			hijos.push([temp[0], 3,temp[1],temp[2]]);
+			hijos.push([temp[0], 3,temp1,temp2]);
 
 		} else if (h[ñ].parentNode.id == 4 ||h[ñ].parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.id == "contenedor") {
 			
-			hijos.push([temp[0], 4,temp[1],temp[2]]);
+			hijos.push([temp[0], 4,temp1,temp1]);
 		}
 	}
-
+console.log(hijos)
 	if (id != "") {
 		$.ajax({
 			url: sit+"php/borra.php",
@@ -219,16 +225,16 @@ function niveles() {
 function insertaM(hijos, id) {
 	console.log('hijos')
 	console.log(hijos)
-	/* men = document.getElementById("menuS").innerText;
+	men = document.getElementById("menuS").innerText;
 	document.getElementById("alerta1").innerHTML =
 		'Se Cargaron los elementos del menu "<strong>' +
 		men +
 		'</strong>" correctamente';
 	document.getElementById("alerta1").removeAttribute("hidden");
 	$.ajax({
-		url: "http://localhost:82/residencia/php/inserta1.php",
+		url: sit+"php/inserta1.php",
 		type: "POST",
-		data: { nombre: hijos, id: id },
+		data: { hijos: hijos, id: id },
 		success: function (r) {
 			console.log(r);
 			$(document).ready(function () {
@@ -241,9 +247,10 @@ function insertaM(hijos, id) {
 						});
 				}, 2000);
 			});
-			poneMenu()
+			recargam(id)
+			poneMenu(r)
 		},
-	}); */
+	});
 }
 
 function onKeyUp(event) {
@@ -417,9 +424,18 @@ function poneMenu(user) {
 				li.appendChild(a);
 
 				if (r2[i].Nivel == 0) {
-					if(r2.length!=1 && r2[i+1].Nivel != 0){
-						p.appendChild(ic2)
+					  
+						
+						if(i!=r2.length){
+							console.log(r2[i].Menu)
+							console.log(r2[i+1].Menu)
+							console.log(i+1)
+							if(r2.length!=1 && r2[i+1].Nivel != 0){
+								p.appendChild(ic2)
+							}
 						}
+						
+					
 					contenedor.appendChild(li);
 				} else if (r2[i].Nivel == 1) {
 					c = contenedor.lastChild;
