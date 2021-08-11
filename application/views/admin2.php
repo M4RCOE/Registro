@@ -31,7 +31,7 @@
         crossorigin="anonymous"></script>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src="<?php echo base_url('js/usuarios.js')?>"></script>
+    
     
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css">
     <script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
@@ -40,8 +40,8 @@
 </head>
  
 <body class="hold-transition sidebar-mini">
-  
- 
+  <input type="text" id='sitioURL' value='<?php echo base_url()?>'hidden>
+  <script src="<?php echo base_url('js/usuarios.js')?>"></script>
 <div class="wrapper">
   <!-- Navbar -->
   <nav class="main-header navbar navbar-expand navbar-white navbar-light">
@@ -322,7 +322,11 @@ font-family:"segoe ui light";
 <div class="modal" id="ModalUsersE">
   <div class="modal-dialog modal-lg">
     <div class="modal-content " style='border-top-right-radius: 10px; border-top-left-radius: 10px;'>
-
+<script>
+    $("#upfile1").click(function () {
+                $("#imgU").trigger('click');
+            }); 
+</script>
       <!-- Modal Header -->
       <div class="modal-header wrap-contact100 contact100-form-title " style='border-top-right-radius: 10px; border-top-left-radius: 10px; background-image: url(<?php echo base_url('img/bg-01.jpg')?>);'>
       <button type="button" class="close pt-2 mt-0 text-light " data-dismiss="modal">&times;</button> 
@@ -586,62 +590,55 @@ wrap-contact100 {
       <button type="button" class="close pt-2 mt-0 text-light " data-dismiss="modal">&times;</button> 
       <h2 class="modal-title text-center text-light ">Agregar Usuario</h2>
       </div>
-
-      <!-- Modal body -->
-      <div id='modalU' class="modal-body pl-0 pr-0">
-          
-          <form id='agregaUser' class='d-flex justify-content-evenly' enctype='multipart/form-data'  method="post">
-          <label  class='text-info  ' style='opacity: 0.8;' >Foto</label><br>
-          <div class="  border-0 float-md-start pl-0" style="width: 8em;">
-            <img class="card-img-top" id='upfile11'src="<?php echo base_url('img/user3.png')?>" width='1%' height='10%'>
-            <div class="card-body">
-                    <input type="file" class="form-control-file" name="imgU"  id="imgU" style="width: 16em;"hidden>      
-            </div>
-            
-         </div>
-         <script>
+      <script>
               $("#upfile11").click(function () {
                 $("#imgU").trigger('click');
             }); 
-              $("#upfile1").click(function () {
-                $("#imgU").trigger('click');
-            }); 
+            
             </script>
-
+      <!-- Modal body -->
    
-              <div class=' ml-6 pl-5 pr-0 mr-0 pt-4'style='display: flex; height: 10em; flex-wrap: wrap; align-content: center; width:650px'>
-              
-                  
-                        <div class='pr-5'>
-                        <label  class='text-info  ' style='opacity: 0.8;'  >Nombre</label><br>
-                        <input class=' border-0 text-center pl-0' type="text" name='nombre' id='nombreI' style='width:250px'>
-                        <hr class='mt-0 pt-0 pl-0' style='width:250px'>
-                        </div>
+      <div id='modalU' class="modal-body">
+          
+      <form id='agregaUser' enctype='multipart/form-data'  method="post">
+      <label class='text-success  ' style='opacity: 0.8;'>Foto</label><br>
+          <div class="  border-0" style="width: 8em;">
+            <img class="card-img-top rounded-circle" id='upfile11'src="<?php echo base_url('img/user.png')?>" width='1%' height='10%'>
+            <div class="card-body">
+                    <input type="file" class="form-control-file" name="imgU"   id="imgU" hidden>
+                    
+            </div>
+         </div>
 
-                        <div class='pl-5'>
-                        <label  class='text-info  ' style='opacity: 0.8;' >Alias</label><br>
-                        <input class=' border-0 text-center' type="text" name='alias' id='aliasI' style='width:250px'>
-                        <hr class='mt-0 pt-0' style='width:250px'>
-                        </div>
- 
-                        <div class='pr-5 pt-4'>
-                        <label  class='text-info  ' style='opacity: 0.8;' >Correo</label><br>
-                        <input class=' border-0 text-center' type="email" name='correo' id='correoI' style='width:250px'>
-                        <hr class='mt-0 pt-0' style='width:250px'>
-                        </div>
-
-                        <div class='pl-5 pt-4'>
-                        <label  class='text-info  'style='opacity: 0.8;' >Clave</label><br>
-                        <input class=' border-0 text-center' type="password"   name='clave' id='claveI' style='width:250px'>
-                        <hr class='mt-0 pt-0' style='width:250px'> 
-                        </div>
-                        
+         <div class=' ml-6 pl-5 pr-0 mr-0 pt-4'style='display: flex; height: 10em; flex-wrap: wrap; align-content: center; width:650px'>
+              <div class='pr-5'>
+                <label class='text-success '  style='opacity: 0.8;'>Nombre</label><br>
+                <input class=' border-0 text-center' type="text" name='nombre'placeholder='user ' id='nombreI' style='width:250px'>
+                <hr class='mt-0 pt-0' style='width:250px'><br>
               </div>
-        
-           
+
+              <div class='pl-5'>
+                <label class='text-success  ' style='opacity: 0.8;'>Alias</label><br>
+                <input class=' border-0 text-center mb-0 pb-0' placeholder='user2'type="text" name='alias' id='aliasI'>
+                <hr class='mt-0 pt-0' style='width:120px'><br>
+              </div>
+              <div class='pr-5'>
+                <label class='text-success  ' style='opacity: 0.8;'>Correo</label><br>
+                <input class=' border-0 text-center mb-0 pb-0' placeholder='admin@gmail.com'type="text" name='correo' id='correoI'><hr class='mt-0 pt-0' style='width:250px'><br>
+               
+              </div>
+              <div class='pl-5'>
+                <label class='text-success  ' style='opacity: 0.8;'>Clave</label><br>
+                <input class=' border-0 text-center mb-0 pb-0' placeholder='*****' type="password" name='clave' id='claveI'>
+                <hr class='mt-0 pt-0' style='width:200px'><br>
+              </div>
+        </div>
+
           </form>
+    
           
       </div>
+
 
       <!-- Modal footer -->
       <div class="modal-footer border-0">

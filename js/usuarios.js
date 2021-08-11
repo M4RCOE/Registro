@@ -1,3 +1,5 @@
+var si=document.getElementById('sitioURL').value
+console.log(si)
 /*cargaUser()
  function cargaUser() {
 	 
@@ -112,7 +114,7 @@ function editUser() {
 		formData.append('file',img)
 	 
 	$.ajax({
-		url: "http://localhost:82/residencia/php/actualizaUC.php",
+		url: si+"php/actualizaUC.php",
 		type: "POST",
 		contentType:false,
 		processData:false,
@@ -150,7 +152,7 @@ function ContinuaElimina() {
 		'Acaba de eliminar al usuario "<strong>' + array[1] + '</strong>" ';
 
 	$.ajax({
-		url: "http://localhost:82/residencia/php/EliminaUser.php",
+		url: si+"php/EliminaUser.php",
 		type: "POST",
 		data: { id: array[0] },
 		success: function (r) {
@@ -193,7 +195,7 @@ function agregarUser() {
 		'Se Agrego al Usuario "'+nom+'" correctamente';
 	 
 	$.ajax({
-		url: "http://localhost:82/residencia/php/InsertaUC.php",
+		url: si+"php/InsertaUC.php",
 		type: "POST",
 		contentType:false,
 		processData:false,
@@ -219,7 +221,7 @@ function agregarUser() {
 function poneMenu(user) {
 	console.log("asignando " + user);
 	$.ajax({
-		url: "http://localhost:82/residencia/php/asignaMenu.php",
+		url: si+"php/asignaMenu.php",
 		data: { user: user },
 		type: "POST",
 		success: function (r) {
@@ -329,7 +331,7 @@ function menuF(obj,user){
 	document.getElementById("alerta2").innerHTML =
 	'Se asigno el menu  "<strong>' + menu + '</strong>"al usuario "<strong>' + nombre + '</strong>"  ';
 	$.ajax({
-		url: "http://localhost:82/residencia/php/menuUser.php",
+		url: si+"php/menuUser.php",
 		type: "POST",
 		data: { nombre: nombre, menu: menu },
 		success: function (r) {
