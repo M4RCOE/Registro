@@ -62,6 +62,7 @@
 } */
 
 function userclick() {
+	
 	let padre = this.parentNode.parentNode;
 	let hijo = padre.childNodes[1];
 	let temp = hijo.id;
@@ -75,6 +76,7 @@ function userclick() {
 	document.getElementById("Alimue").value = alias;
 	document.getElementById("idmue").value = id;
 	document.getElementById("Corrmue").value = correo;
+	document.getElementById("upfile1").setAttribute('src',padre.childNodes[0].childNodes[0].src)
 $("#ModalUsersE").modal("show");
 	console.log("id " + id + " nom " + nombre + " alias " + alias);
 	 
@@ -249,7 +251,7 @@ function poneMenu(user) {
 				li.appendChild(a);
 				
 				if (r2[i].Nivel == 0) {
-					if(r2[i+1].Nivel != 0){
+					if(r2.length!=1 && r2[i+1].Nivel != 0){
 					p.appendChild(ic2)
 					}
 					

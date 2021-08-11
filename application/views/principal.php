@@ -1,9 +1,9 @@
-<body>
+
 
   <br>
-  <div>
 
-  <!-- Button trigger modal -->
+
+ 
  
 <style>
 .input {
@@ -17,6 +17,8 @@
                 width: 85px;
                 vertical-align: top;
                 text-align: center;
+                height: 100px;
+                width: 100px;
             }
             .input:focus{
               font-size: 30px;
@@ -27,24 +29,30 @@
                 margin: 1em;
                 max-width: 350px;
                 vertical-align: top;
-                height: 100px;
-                width: 100px;
+                height: 150px;
+                width: 150px;
+                
+            }
+            #cancelar:hover{
+              font-size: 32px;
+              color: #FF0000;
             }
 
 
 </style>
+
 <!-- Modal -->
-<div class="modal fade bg-dark" id="modalnip" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-xl bg-dark">
-    <div class="modal-content bg-dark border-0">
-       <h1 class='text-center pt-5 pb-5 text-white'>Ingrese la Contraseña</h1><br><br> 
+<div class="modal fade  " id="modalnip" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" style='opacity: 0.9; background:black;'>
+  <div class="modal-dialog modal-xl  "style=' background:black;'>
+    <div class="modal-content   border-0"style=' background:black;'>
+       <h1 class='text-center pt-5 pb-5 text-white'>Ingrese Nip</h1>  
       <div class="modal-body d-flex justify-content-center pt-6 mt-4" style='height:250px'>
       <input type="text" id='pnameU' hidden>
       <input type="text" id='pnameU2' hidden>
-       <input class='input text-muted' type="password" name="" id="pu1" maxlength="1" oninput='$("#pu2").focus()'>
-       <input class='input text-muted' type="password" name="" id="pu2" maxlength="1" oninput='$("#pu3").focus()'>
-       <input class='input text-muted' type="password" name="" id="pu3" maxlength="1" oninput='$("#pu4").focus()'>
-       <input class='input text-muted' type="password" name="" id="pu4" maxlength="1" oninput='Nip()'>
+       <input class='input text-muted mr-1' type="password" name="" id="pu1" maxlength="1" oninput='$("#pu2").focus()'>
+       <input class='input text-muted mr-1' type="password" name="" id="pu2" maxlength="1" oninput='$("#pu3").focus()'>
+       <input class='input text-muted mr-1' type="password" name="" id="pu3" maxlength="1" oninput='$("#pu4").focus()'>
+       <input class='input text-muted mr-1' type="password" name="" id="pu4" maxlength="1" oninput='Nip()'>
             
        
        
@@ -52,7 +60,7 @@
      <div style='height:95px'>
      <center>
        
-       <label class='h3 text-danger' data-bs-dismiss="modal">Cancelar</label>
+       <label class='h3 text-danger mt-0' id='cancelar' data-bs-dismiss="modal" style='hover:white;'>Cancelar</label>
        </center>
      </div>
     </div>
@@ -97,11 +105,57 @@
               <span class="text-muted mt-5" id='sp<?php echo($domain)?>'></span>
               <script>
                 horas('<?php echo($u)?>')
-                dia('<?php echo($u)?>')
+               
+                
+ /*     dds = {};
+dia = function (n) {
+	//console.log('dentro de dia '+n)
+	let para_graficaic = [0, 0, 0, 0, 0];
+	var parametros = { nomb: n };
+	$.ajax({
+		url: "http://localhost:82/residencia/php/semana.php",
+		type: "POST",
+		data: parametros,
+		success: function (r) {
+		 
+      r2=JSON.parse(r)
+			// console.log(r2)
+			if(r2.length!=0){
+        for (x = 0; x < r2.length; x++) {
+				var d = new Date("0001-01-01T" + r2[x].hrs);
+				var minutos = d.getHours() * 60 + d.getMinutes();
+			 
+						if (r2[x].dia == 0) {
+							para_graficaic[0] = minutos / 60;
+						}
+						if (r2[x].dia == 1) {
+							para_graficaic[1] = minutos / 60;
+						}
+						if (r2[x].dia == 2) {
+							para_graficaic[2] = minutos / 60;
+						}
+						if (r2[x].dia == 3) {
+							para_graficaic[3] = minutos / 60;
+						}
+						if (r2[x].dia == 4) {
+							para_graficaic[4] = minutos / 60;
+						}  
+						if (r2[x].dia == 5) {
+							para_graficaic[5] = minutos / 60;
+						}  
+			  }
+      }
+			dds["myChart" + n2] = para_graficaic;
+			console.log(n2+" "+para_graficaic)
+		},
+	});
+}; */
+dia('<?php echo($u)?>')
+    
               </script>
               <span class="text-muted ml-1 mr-0"> Actual</span>
               <span id='time<?php echo($domain)?>'></span>
-              <input style="background-color:transparent; width: 13px" class="p-0 m-0 text-center border-0 text-muted"
+              <input style="background-color:transparent; width: 22px" class="p-0 m-0 text-center border-0 text-muted"
                 id="horas2<?php echo($domain)?>" type="text" value="00 " name="t1" disabled />
               <span class='p-0 m-0'>:</span>
               <input style="background-color:transparent;width: 13px" class="p-0 m-0 text-center border-0 text-muted"
@@ -408,7 +462,7 @@
               cargaTareas('<?php echo($u)?>');
               function cargaTareas(n) {
                 nn = n.split(' ')
-                console.log('Cargando')
+                //console.log('Cargando')
                 let contenedor = document.getElementById("contiene" + nn[0]);
                 let contenedor2 = document.getElementById("contiene2" + nn[0]);
                 let contenedor3 = document.getElementById("contiene3" + nn[0]);
@@ -500,8 +554,8 @@
                 let txt3 = this.childNodes[1]
                 let txt2 = txt.split(',')
                 let name = this.childNodes[0].id
-                console.log(txt2[0].replaceAll('-', '/') + '-> ' + name.split(',', 1))
-                console.log(this.childNodes[0].id.replaceAll(',', ' '))
+               /*  console.log(txt2[0].replaceAll('-', '/') + '-> ' + name.split(',', 1))
+                console.log(this.childNodes[0].id.replaceAll(',', ' ')) */
 
                 document.getElementById("TmT" + name.split(',', 1)).innerText = "Tarea#" + txt3.id
                 document.getElementById("mid" + name.split(',', 1)).value = txt3.id

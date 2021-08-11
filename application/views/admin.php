@@ -18,7 +18,7 @@
   <link rel='stylesheet' type='text/css' media='screen' href='fontawesome-free/css/all.min.css'>
   <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css" rel="stylesheet"/>
 
-
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
     <!-- Font Awesome JS -->
     <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js"
         integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ"
@@ -31,106 +31,14 @@
     <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
     <script src="<?php echo base_url('js/jquery.mjs.nestedSortable.js')?>"></script>
-    <script src="<?php echo base_url('js/mmenu.js')?>"></script>
+
  
 </head>
  
 <body class="hold-transition sidebar-mini">
 
-<!--  <script>
-   function poneMenu(user){
-	  console.log('asignando '+user)
-	 $.ajax({
-		url: "http://localhost:82/residencia/php/asignaMenu.php",
-		data: { user:user },
-		type: "POST",
-		success: function (r) {
-			r2 = JSON.parse(r);
-			console.log(r2);
-		contenedor = document.getElementById("menusUser");
-	 	contenedor.innerHTML = "";  
-			for (i = 0; i < r2.length; i++) {
-        let li = document.createElement("li");
-        let ul = document.createElement("ul");
-        let a = document.createElement("a");
-        let p = document.createElement("p");
-        ul.className='nav nav-treeview'
-        ul.setAttribute('style','display: none;')
-        a.setAttribute('href',r2[i].Enlace);
-        a.setAttribute('target','_blank');
-        a.className='nav-link'
-        p.innerHTML=r2[i].Menu   
-        li.className='nav-item'     
-        a.appendChild(p)
-        li.appendChild(a)
- 
-
-				if (r2[i].Nivel == 0) {
-     
-					contenedor.appendChild(li);
-					
-				} else if (r2[i].Nivel == 1) {
-        
-					c = contenedor.lastChild;
-          console.log(c)
-          console.log(r2[i].Menu+' '+c.tagName)
-          if(c.tagName=='UL'){
-            c.appendChild(li);
-          }else{
-            console.log('agrega UL')
-
-            ul.appendChild(li);
-            c.appendChild(ul);
-          }
-				
-           
-				} else if (r2[i].Nivel == 2) {
-					c = contenedor.lastChild;
-          
-					c2 = c.lastChild;
-					ol.appendChild(li);
-				 
-					c2.appendChild(ol);
-				} else if (r2[i].Nivel == 3) {
-					c = contenedor.lastChild;
-					c2 = c.lastChild;
-					c3 = c2.lastChild;
-					ol.appendChild(li);
-				 
-					c3.appendChild(ol);
-				} else if (r2[i].Nivel == 4) {
-					c = contenedor.lastChild;
-					c2 = c.lastChild;
-					c3 = c2.lastChild;
-					c4 = c3.lastChild;
-					ol.appendChild(li);
-				 
-					c3.appendChild(ol);
-				} else if (r2[i].Nivel == 5) {
-					c = contenedor.lastChild;
-					c2 = c.lastChild;
-					c3 = c2.lastChild;
-					c4 = c3.lastChild;
-					c5 = c4.lastChild;
-					ol.appendChild(li);
-			 
-					c3.appendChild(ol);
-				} else if (r2[i].Nivel == 6) {
-					c = contenedor.lastChild;
-					c2 = c.lastChild;
-					c3 = c2.lastChild;
-					c4 = c3.lastChild;
-					c5 = c4.lastChild;
-					c6 = c5.lastChild;
-					ol.appendChild(li);
-		 
-					c3.appendChild(ol);
-				}
-			}
-		},
-	});  
-}
- </script> -->
+<input type="text" id='sitio' value='<?php echo base_url()?>' hidden>
+<script src="<?php echo base_url('js/mmenu.js')?>"></script>
 <div class="wrapper">
   <!-- Navbar -->
   <nav class="main-header navbar navbar-expand navbar-white navbar-light">
@@ -262,7 +170,7 @@
       <!--  -->
       <li class="nav-item dropdown">
         <a class="nav-link" data-toggle="dropdown" href="#">
-        <i class="far fa-user"></i>
+        <i class="fas fa-cog"></i>
            
         </a>
         <div class="dropdown-menu dropdown-menu-md dropdown-menu-right" >
@@ -300,7 +208,8 @@
   
     <!-- Sidebar -->
     <div class="sidebar">
-      <!-- Sidebar user panel (optional) -->
+        <!-- Sidebar user panel (optional) -->
+        < <!-- Sidebar user panel (optional) -->
       <div class="user-panel mt-3 pb-3 mb-3 d-flex">
         <div class="image">
           <img src="<?php echo base_url($user =$this->session->userdata('user')['img_user'])?>" class="img-circle elevation-2" alt="User Image">
@@ -313,6 +222,7 @@
             ?></a>
         </div>
       </div>
+        </div>
 
       <!-- SidebarSearch Form -->
       <div  class='pl-0 ml-0'>
@@ -344,7 +254,7 @@
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">Dashboard v3</li>
+              <li class="breadcrumb-item active">menu</li>
             </ol>
           </div><!-- /.col -->
         </div><!-- /.row -->
@@ -385,8 +295,8 @@
 
 
                 <li>
-                    <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle ">Url Personalizado</a>
-                    <hr style='width:220px'> 
+                    <a id='up' href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle " hidden>Url Personalizado</a>
+                     
                     <ul class="collapse list-unstyled " id="homeSubmenu">
                         <br>
                         <div class='ml-3'>
@@ -426,11 +336,10 @@
             <div class="dropdown ml-0 dropright d-flex justify-content-between">
   
                 <button class=" ml-3 btn btn-transparent dropdown-toggle dropdown-menu-right" type="button" id="dropdownMenuButton"
-                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"  >
-                    <img src="data:image/svg+xml;base64,PHN2ZyBpZD0iQ2FwYV8xIiBlbmFibGUtYmFja2dyb3VuZD0ibmV3IDAgMCA1MTIgNTEyIiBoZWlnaHQ9IjUxMiIgdmlld0JveD0iMCAwIDUxMiA1MTIiIHdpZHRoPSI1MTIiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGc+PHBhdGggZD0ibTUxMiA5MWgtMTk2bC00NSA0NC41IDQ1IDQ1LjVoMTk2eiIgZmlsbD0iIzM4NTdiYyIvPjxwYXRoIGQ9Im0xMjAgOTFoMTk2djkwaC0xOTZ6IiBmaWxsPSIjM2E2ZmQ4Ii8+PGNpcmNsZSBjeD0iNDUiIGN5PSIxMzYiIGZpbGw9IiMxNGNmZmYiIHI9IjQ1Ii8+PHBhdGggZD0ibTUxMiAyMTFoLTE5NmwtNDUgNDQuNSA0NSA0NS41aDE5NnoiIGZpbGw9IiMzODU3YmMiLz48cGF0aCBkPSJtMTIwIDIxMWgxOTZ2OTBoLTE5NnoiIGZpbGw9IiMzYTZmZDgiLz48Y2lyY2xlIGN4PSI0NSIgY3k9IjI1NiIgZmlsbD0iIzE0Y2ZmZiIgcj0iNDUiLz48cGF0aCBkPSJtNTEyIDMzMWgtMTk2bC00NSA0NC41IDQ1IDQ1LjVoMTk2eiIgZmlsbD0iIzM4NTdiYyIvPjxwYXRoIGQ9Im0xMjAgMzMxaDE5NnY5MGgtMTk2eiIgZmlsbD0iIzNhNmZkOCIvPjxjaXJjbGUgY3g9IjQ1IiBjeT0iMzc2IiBmaWxsPSIjMTRjZmZmIiByPSI0NSIvPjwvZz48L3N2Zz4=" height='50px'/>
-                     
+                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"  ><H5>Elije Menu</H5>
+                    <img src="data:image/svg+xml;base64,PHN2ZyBlbmFibGUtYmFja2dyb3VuZD0ibmV3IDAgMCA2NCA2NCIgaGVpZ2h0PSI1MTIiIHZpZXdCb3g9IjAgMCA2NCA2NCIgd2lkdGg9IjUxMiIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBpZD0iSWNvbnMiPjxnPjxnPjxwYXRoIGQ9Im0zMiA1OGMtMTQuMzU5IDAtMjYtMTEuNjQxLTI2LTI2IDAtMTQuMzU5IDExLjY0MS0yNiAyNi0yNiAxNC4zNTkgMCAyNiAxMS42NDEgMjYgMjYgMCAxNC4zNTktMTEuNjQxIDI2LTI2IDI2eiIgZmlsbD0iI2ZhYjQwMCIvPjwvZz48Zz48cGF0aCBkPSJtMTAgMzJjMC0xMy42ODYgMTAuNTc2LTI0Ljg5NCAyNC0yNS45MTYtLjY2MS0uMDUtMS4zMjYtLjA4NC0yLS4wODQtMTQuMzU5IDAtMjYgMTEuNjQxLTI2IDI2IDAgMTQuMzU5IDExLjY0MSAyNiAyNiAyNiAuNjc0IDAgMS4zMzktLjAzNCAyLS4wODQtMTMuNDI0LTEuMDIyLTI0LTEyLjIzLTI0LTI1LjkxNnoiIGZpbGw9IiNkYzk2MDAiLz48L2c+PGc+PHBhdGggZD0ibTE4IDIwaDI4djRoLTI4eiIgZmlsbD0iI2YwZjBmMCIvPjwvZz48Zz48cGF0aCBkPSJtMTggMzBoMjh2NGgtMjh6IiBmaWxsPSIjZjBmMGYwIi8+PC9nPjxnPjxwYXRoIGQ9Im0xOCA0MGgyOHY0aC0yOHoiIGZpbGw9IiNmMGYwZjAiLz48L2c+PC9nPjwvZz48L3N2Zz4="  height='50px'/>
                 </button>
-                 
+                
                 <h2>Contenedor</h2>
                 <h1 id='h44'></h1>
                 <h1></h1>
@@ -443,12 +352,12 @@
                 </div>
             </div>
             <center>
-                <span id='menuS'></span>
+                <h4 class='text-muted pt-0' id='menuS'></h4>
                 <span id='menuS2' hidden></span>
             </center>
-            <div class='cc'>
+            <div class='cc pt-1'>
                 <ol id='contenedor' class="sortable">
-                     <li><div>Menu</div></li>
+                     
                     
 
                 </ol>
@@ -577,7 +486,7 @@ font-size: 18px;
 
 <select class='FontAwesomeSelect' id='icon'>
  
-		<option value='fas fa-home'>&#xf015; home</option>
+		<option value='fas fa-home'> &#xf015; home</option>
 		<option value='fab fa-leanpub'>&#xf212; limpieza</option>
 		<option value='fas fa-couch'>&#xf4b8; muebles</option>
 		<option value='fas fa-file-video'>&#xf1c8; video</option>

@@ -21,23 +21,25 @@
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="<?php echo base_url('js/jquery.js');?>"></script>
-    <script src="<?php echo base_url('js/metodo.js');?>"></script>
+    
   
     <link rel="stylesheet" type='text/css'  href="<?php echo base_url('css/estilos.css');?>">
     
-  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment-with-locales.min.js"></script>
    
    
    
  
   </head>
   <body>
-
+  <input type="text" id='url_sitio' value='<?php echo base_url()?>'hidden>
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark nav-justified">  
   <div class="container-fluid">
     <h2 hidden>Bienvenido</h2>
     <ul class="navbar-nav">
     <li class="nav-item">
+    <script src="<?php echo base_url('js/metodo.js');?>"></script>
     <center>
     <a class="navbar-brand text-right" ><h2>Bienvenido</h2></a>
     </center>

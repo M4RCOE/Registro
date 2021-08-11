@@ -14,8 +14,10 @@
   <!-- Theme style -->
   <link rel="stylesheet" href="<?php echo base_url('dist/css/adminlte.min.css')?>">
   <link rel="stylesheet" href="<?php echo base_url('css/estilo.css')?>">
-  
 
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+  
+  
 
      
 
@@ -171,7 +173,7 @@
       <!--  -->
       <li class="nav-item dropdown">
         <a class="nav-link" data-toggle="dropdown" href="#">
-        <i class="far fa-user"></i>
+        <i class="fas fa-cog"></i>
            
         </a>
         <div class="dropdown-menu dropdown-menu-md dropdown-menu-right  " >
@@ -250,7 +252,7 @@
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">Dashboard v3</li>
+              <li class="breadcrumb-item active">Usuarios</li>
             </ol>
           </div><!-- /.col -->
         </div><!-- /.row -->
@@ -262,75 +264,107 @@
      <div class="alert alert-success text-center" id='alerta2' hidden role='alert'></div>
         <div class="alert alert-danger text-center" id='alerta3' hidden role='alert'></div>
 <center>
-  
+  <style>
+    th{
+
+      text-align:center;
+margin:0px;
+font-size:115%;
+font-family:"segoe ui light";
+ 
+    }
+    thead tr{
+      padding-top: 0% !important;
+      
+    }
+    thead th{
+      padding-top: 0% !important;
+      
+    }
+</style>
 
 <div id='user'  class='mr-5'>
       <table class="table table-hover " id="table"   >
 
-<thead class="thead bg-primary text-white " >
+<thead class="thead bg-primary text-white " style='height: 10px;'>
 
-  <tr >
-    <th class=" pl-5  " >
-  
-    <h5>Avatar</h5>
+  <tr  class="p-0 m-0">
+ 
+    <th class="mt-0" style='with:10px'>
+    Avatar 
     </th>
-    <th class=" pl-5  ">
-  
-    <h5>Usuarios</h5>
+    <th class="mt-0">
+     Usuarios 
     </th>
-    <th class="pl-2 ">
-    <h5>Alias</h5>
-
+    <th class="mt-0">
+     Alias 
     </th>
-    <th class="pl-5 ">
-    <h5>Correo</h5>
-       
+    <th class="mt-0">
+    Correo 
     </th>
-    <th class="pl-4 ">
-    <h5>Menu</h5>
-       
+    <th class="mt-0">
+     Menu 
     </th>
-    <th><button class='bg-transparent border-0 ml-4 pt-2 pl-0' onclick='agregarUserM()' ><img src="data:image/svg+xml;base64,PHN2ZyBoZWlnaHQ9IjUwNnB0IiB2aWV3Qm94PSItNDggMCA1MDYgNTA2LjQiIHdpZHRoPSI1MDZwdCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cGF0aCBkPSJtMjU1LjE2MDE1NiAyNjQuMDU4NTk0YzQ4LjgwNDY4OC0xMS44OTg0MzggOTkuNzg1MTU2IDguNDU3MDMxIDEyNi45NzY1NjMgNTAuNjk5MjE4IDI3LjE4NzUgNDIuMjM4MjgyIDI0LjYwMTU2MiA5Ny4wNzQyMTktNi40Mzc1IDEzNi41NzAzMTMtMzEuMDQyOTY5IDM5LjQ5MjE4Ny04My43MTA5MzggNTQuOTY0ODQ0LTEzMS4xNzk2ODggMzguNTI3MzQ0LTQ3LjQ2ODc1LTE2LjQzMzU5NC03OS4yOTY4NzUtNjEuMTYwMTU3LTc5LjI2OTUzMS0xMTEuMzk0NTMxLS4zMjgxMjUtNTQuNDE3OTY5IDM2Ljk1NzAzMS0xMDEuODU5Mzc2IDg5LjkxMDE1Ni0xMTQuNDAyMzQ0em04OC4wMzkwNjMgMTMzLjk0MTQwNnYtMzZoLTQ1di00NWgtMzZ2NDVoLTQ1djM2aDQ1djQ1aDM2di00NXptMCAwIiBmaWxsPSIjZmVkYjQxIi8+PHBhdGggZD0ibTM0My4xOTkyMTkgMzYydjM2aC00NXY0NWgtMzZ2LTQ1aC00NXYtMzZoNDV2LTQ1aDM2djQ1em0wIDAiIGZpbGw9IiMwMGVmZDEiLz48cGF0aCBkPSJtMTUyLjE3MTg3NSAxODEuMjg5MDYyYzQ5LjQ3MjY1Ni4wNzgxMjYgOTIuMjY1NjI1IDM0LjQ3MjY1NyAxMDIuOTg4MjgxIDgyLjc2OTUzMi02MS4zMjQyMTggMTQuOTUzMTI1LTk5Ljk3MjY1NiA3NS41NzgxMjUtODcuNjQwNjI1IDEzNy40ODA0NjhoLTE1Ny44MDA3ODF2LTExNC43NzczNDNjLjEwMTU2Mi01OC4zNTE1NjMgNDcuNDgwNDY5LTEwNS41NzAzMTMgMTA1LjgzMjAzMS0xMDUuNDcyNjU3em0wIDAiIGZpbGw9IiMwMGFjZWEiLz48cGF0aCBkPSJtMjA1LjQ4ODI4MSA4MS42NDA2MjV2LjAzOTA2M2MwIDM5LjYyNS0zMi4xMTMyODEgNzEuNzUzOTA2LTcxLjczODI4MSA3MS43Njk1MzFoLS4wNTg1OTRjLTM5LjY0MDYyNS4wMTE3MTktNzEuNzg5MDYyLTMyLjEwOTM3NS03MS44MTI1LTcxLjc1di0uMDk3NjU3Yy4wMDM5MDYtMzkuNjI1IDMyLjExNzE4OC03MS43NTM5MDYgNzEuNzQyMTg4LTcxLjc3MzQzN2guMTA5Mzc1YzM5LjYyNSAwIDcxLjc1IDMyLjExNzE4NyA3MS43NTc4MTIgNzEuNzQyMTg3em0wIDAiIGZpbGw9IiMwMGFjZWEiLz48ZyBmaWxsPSIjMDgzODYzIj48cGF0aCBkPSJtOS43MTg3NSA0MTJoMTQ5Ljg2NzE4OGMxNC43NzczNDMgNTUgNjUuNDAyMzQzIDk0LjM5ODQzOCAxMjMuMzc1IDk0LjM5ODQzOCA3MC40MjU3ODEgMCAxMjcuNzE4NzUtNTcuNDA2MjUgMTI3LjcxODc1LTEyNy44MjQyMTlzLTU3LjI5Mjk2OS0xMjcuNzczNDM4LTEyNy43MTg3NS0xMjcuNzczNDM4Yy02Ljg5MDYyNi0uMDA3ODEyLTEzLjc2OTUzMi41MzkwNjMtMjAuNTcwMzEzIDEuNjM2NzE5LTE1LjA0Mjk2OS00OC4yODEyNS01OS42NDg0MzctODEuMjM4MjgxLTExMC4yMTg3NS04MS40Mzc1aC0zNi44MDA3ODFjLTYzLjY3OTY4OCAwLTExNS4xNzE4NzUgNTIuMDQyOTY5LTExNS4xNzE4NzUgMTE1Ljc2MTcxOXYxMTQuNzc3MzQzYzAgNS41MjM0MzggNCAxMC40NjA5MzggOS41MTk1MzEgMTAuNDYwOTM4em0zODAuOTYwOTM4LTMzLjUzOTA2MmMwIDU5LjQ4ODI4MS00OC4yMjY1NjMgMTA3LjcxNDg0My0xMDcuNzE0ODQ0IDEwNy43MTQ4NDMtNTkuNDg4MjgyIDAtMTA3LjcxNDg0NC00OC4yMjY1NjItMTA3LjcxNDg0NC0xMDcuNzE0ODQzLS4wOTM3NS0yNC4zODI4MTMgOC4xNzU3ODEtNDguMDU4NTk0IDIzLjQyOTY4OC02Ny4wNzgxMjYgMTQuOTE0MDYyLTE4LjY5MTQwNiAzNS42MDU0NjgtMzEuOTE0MDYyIDU4LjgzMjAzMS0zNy42MDE1NjJsLjAyMzQzNy0uMDAzOTA2YzMyLjExMzI4Mi03Ljc4NTE1NiA2Ni4wMTk1MzItLjQwNjI1IDkxLjk5MjE4OCAyMC4wMTE3MTggMjUuOTcyNjU2IDIwLjQyMTg3NiA0MS4xNDA2MjUgNTEuNjMyODEzIDQxLjE1MjM0NCA4NC42NzE4NzZ6bS0zNzAuNDgwNDY5LTkxLjY4MzU5NGMwLTUyLjY4NzUgNDIuNS05NS43NzczNDQgOTUuMTgzNTkzLTk1Ljc3NzM0NGgzNi43Njk1MzJjNDEuMzM1OTM3LjE3OTY4OCA3Ny45MDIzNDQgMjYuODIwMzEyIDkwLjc0NjA5NCA2Ni4xMDU0NjktMjMuNTcwMzEzIDcuODUxNTYyLTQ0LjM2MzI4MiAyMi4zNTkzNzUtNTkuODU5Mzc2IDQxLjc3NzM0My0xOC4wOTc2NTYgMjIuNjQ0NTMyLTI3LjkwMjM0MyA1MC44MDA3ODItMjcuNzg5MDYyIDc5Ljc4OTA2MyAwIDQuMzc1LjIyNjU2MiA4LjMyODEyNS42NzE4NzUgMTMuMzI4MTI1aC0xMzUuNzIyNjU2em0wIDAiLz48cGF0aCBkPSJtMTMzLjczMDQ2OSAwaC0uMTE3MTg4Yy0yMS42MjEwOTMuMDA3ODEyNS00Mi4zNTE1NjIgOC42MTMyODEtNTcuNjI1IDIzLjkxNzk2OS0xNS4yNzM0MzcgMTUuMzA4NTkzLTIzLjgzMjAzMSAzNi4wNTg1OTMtMjMuNzg5MDYyIDU3LjY4MzU5M3YuMTAxNTYzYy0uMDE5NTMxIDIxLjYwMTU2MyA4LjU2MjUgNDIuMzE2NDA2IDIzLjg1MTU2MiA1Ny41NzQyMTkgMTUuMjg5MDYzIDE1LjI1MzkwNiAzNi4wMjM0MzggMjMuNzkyOTY4IDU3LjYyMTA5NCAyMy43MjI2NTZoLjA4MjAzMWMyMS41OTc2NTYuMDU4NTk0IDQyLjMyODEyNS04LjQ4ODI4MSA1Ny42MDkzNzUtMjMuNzQ2MDk0IDE1LjI4NTE1Ny0xNS4yNjE3MTggMjMuODU5Mzc1LTM1Ljk3NjU2MiAyMy44MzU5MzgtNTcuNTc0MjE4di0uMTEzMjgyYy4wMzEyNS0yMS42MjUtOC41MzkwNjMtNDIuMzc1LTIzLjgyNDIxOS01Ny42NzU3ODEtMTUuMjgxMjUtMTUuMjk2ODc1LTM2LjAxOTUzMS0yMy44OTQ1MzEyNS01Ny42NDQ1MzEtMjMuODkwNjI1em03MS43NTc4MTIgODEuNTcwMzEyLTEwLS4xMTcxODdjLS4wNTQ2ODcgMzQuMDQ2ODc1LTI3LjY5NTMxMiA2MS41OTc2NTYtNjEuNzM4MjgxIDYxLjU0Njg3NWgtLjA1ODU5NGMtLjAwNzgxMiAwLS4wMTE3MTguMjI2NTYyLS4wMTk1MzEuMjI2NTYyLTIyLjEwOTM3NS4wOTM3NS00Mi41ODU5MzctMTEuNjQwNjI0LTUzLjY3NTc4MS0zMC43NzM0MzctMTEuMDg1OTM4LTE5LjEyODkwNi0xMS4wOTc2NTYtNDIuNzMwNDY5LS4wMjM0MzgtNjEuODY3MTg3IDExLjA3NDIxOS0xOS4xNDA2MjYgMzEuNTM5MDYzLTMwLjg5MDYyNiA1My42NTIzNDQtMzAuODEyNWwtLjAwMzkwNi05Ljk3MjY1Ny4xMDkzNzUgMTAuMDExNzE5YzM0LjA4NTkzNy4wNDI5NjkgNjEuNzEwOTM3IDI3LjY2NDA2MiA2MS43NTc4MTIgNjEuNzV6bTAgMCIvPjxwYXRoIGQ9Im0yNTIuMTk5MjE5IDMxN3YzNWgtMzVjLTUuNTIzNDM4IDAtMTAgNC40NzY1NjItMTAgMTB2MzZjMCA1LjUyMzQzOCA0LjQ3NjU2MiAxMCAxMCAxMGgzNXYzNWMwIDUuNTIzNDM4IDQuNDc2NTYyIDEwIDEwIDEwaDM2YzUuNTIzNDM3IDAgMTAtNC40NzY1NjIgMTAtMTB2LTM1aDM1YzUuNTIzNDM3IDAgMTAtNC40NzY1NjIgMTAtMTB2LTM2YzAtNS41MjM0MzgtNC40NzY1NjMtMTAtMTAtMTBoLTM1di0zNWMwLTUuNTIzNDM4LTQuNDc2NTYzLTEwLTEwLTEwaC0zNmMtNS41MjM0MzggMC0xMCA0LjQ3NjU2Mi0xMCAxMHptMjAgNDV2LTM1aDE2djM1YzAgNS41MjM0MzggNC40NzY1NjIgMTAgMTAgMTBoMzV2MTZoLTM1Yy01LjUyMzQzOCAwLTEwIDQuNDc2NTYyLTEwIDEwdjM1aC0xNnYtMzVjMC01LjUyMzQzOC00LjQ3NjU2My0xMC0xMC0xMGgtMzV2LTE2aDM1YzUuNTIzNDM3IDAgMTAtNC40NzY1NjIgMTAtMTB6bTAgMCIvPjwvZz48L3N2Zz4="  width='35px'/></button>
-     
+   
+    <th class="  mt-0 mb-0">
+      <button class='bg-transparent border-0 ml-4 pt-2 pl-0' style='height: 30px;' onclick='agregarUserM()' ><img src="data:image/svg+xml;base64,PHN2ZyBoZWlnaHQ9IjUwNnB0IiB2aWV3Qm94PSItNDggMCA1MDYgNTA2LjQiIHdpZHRoPSI1MDZwdCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cGF0aCBkPSJtMjU1LjE2MDE1NiAyNjQuMDU4NTk0YzQ4LjgwNDY4OC0xMS44OTg0MzggOTkuNzg1MTU2IDguNDU3MDMxIDEyNi45NzY1NjMgNTAuNjk5MjE4IDI3LjE4NzUgNDIuMjM4MjgyIDI0LjYwMTU2MiA5Ny4wNzQyMTktNi40Mzc1IDEzNi41NzAzMTMtMzEuMDQyOTY5IDM5LjQ5MjE4Ny04My43MTA5MzggNTQuOTY0ODQ0LTEzMS4xNzk2ODggMzguNTI3MzQ0LTQ3LjQ2ODc1LTE2LjQzMzU5NC03OS4yOTY4NzUtNjEuMTYwMTU3LTc5LjI2OTUzMS0xMTEuMzk0NTMxLS4zMjgxMjUtNTQuNDE3OTY5IDM2Ljk1NzAzMS0xMDEuODU5Mzc2IDg5LjkxMDE1Ni0xMTQuNDAyMzQ0em04OC4wMzkwNjMgMTMzLjk0MTQwNnYtMzZoLTQ1di00NWgtMzZ2NDVoLTQ1djM2aDQ1djQ1aDM2di00NXptMCAwIiBmaWxsPSIjZmVkYjQxIi8+PHBhdGggZD0ibTM0My4xOTkyMTkgMzYydjM2aC00NXY0NWgtMzZ2LTQ1aC00NXYtMzZoNDV2LTQ1aDM2djQ1em0wIDAiIGZpbGw9IiMwMGVmZDEiLz48cGF0aCBkPSJtMTUyLjE3MTg3NSAxODEuMjg5MDYyYzQ5LjQ3MjY1Ni4wNzgxMjYgOTIuMjY1NjI1IDM0LjQ3MjY1NyAxMDIuOTg4MjgxIDgyLjc2OTUzMi02MS4zMjQyMTggMTQuOTUzMTI1LTk5Ljk3MjY1NiA3NS41NzgxMjUtODcuNjQwNjI1IDEzNy40ODA0NjhoLTE1Ny44MDA3ODF2LTExNC43NzczNDNjLjEwMTU2Mi01OC4zNTE1NjMgNDcuNDgwNDY5LTEwNS41NzAzMTMgMTA1LjgzMjAzMS0xMDUuNDcyNjU3em0wIDAiIGZpbGw9IiMwMGFjZWEiLz48cGF0aCBkPSJtMjA1LjQ4ODI4MSA4MS42NDA2MjV2LjAzOTA2M2MwIDM5LjYyNS0zMi4xMTMyODEgNzEuNzUzOTA2LTcxLjczODI4MSA3MS43Njk1MzFoLS4wNTg1OTRjLTM5LjY0MDYyNS4wMTE3MTktNzEuNzg5MDYyLTMyLjEwOTM3NS03MS44MTI1LTcxLjc1di0uMDk3NjU3Yy4wMDM5MDYtMzkuNjI1IDMyLjExNzE4OC03MS43NTM5MDYgNzEuNzQyMTg4LTcxLjc3MzQzN2guMTA5Mzc1YzM5LjYyNSAwIDcxLjc1IDMyLjExNzE4NyA3MS43NTc4MTIgNzEuNzQyMTg3em0wIDAiIGZpbGw9IiMwMGFjZWEiLz48ZyBmaWxsPSIjMDgzODYzIj48cGF0aCBkPSJtOS43MTg3NSA0MTJoMTQ5Ljg2NzE4OGMxNC43NzczNDMgNTUgNjUuNDAyMzQzIDk0LjM5ODQzOCAxMjMuMzc1IDk0LjM5ODQzOCA3MC40MjU3ODEgMCAxMjcuNzE4NzUtNTcuNDA2MjUgMTI3LjcxODc1LTEyNy44MjQyMTlzLTU3LjI5Mjk2OS0xMjcuNzczNDM4LTEyNy43MTg3NS0xMjcuNzczNDM4Yy02Ljg5MDYyNi0uMDA3ODEyLTEzLjc2OTUzMi41MzkwNjMtMjAuNTcwMzEzIDEuNjM2NzE5LTE1LjA0Mjk2OS00OC4yODEyNS01OS42NDg0MzctODEuMjM4MjgxLTExMC4yMTg3NS04MS40Mzc1aC0zNi44MDA3ODFjLTYzLjY3OTY4OCAwLTExNS4xNzE4NzUgNTIuMDQyOTY5LTExNS4xNzE4NzUgMTE1Ljc2MTcxOXYxMTQuNzc3MzQzYzAgNS41MjM0MzggNCAxMC40NjA5MzggOS41MTk1MzEgMTAuNDYwOTM4em0zODAuOTYwOTM4LTMzLjUzOTA2MmMwIDU5LjQ4ODI4MS00OC4yMjY1NjMgMTA3LjcxNDg0My0xMDcuNzE0ODQ0IDEwNy43MTQ4NDMtNTkuNDg4MjgyIDAtMTA3LjcxNDg0NC00OC4yMjY1NjItMTA3LjcxNDg0NC0xMDcuNzE0ODQzLS4wOTM3NS0yNC4zODI4MTMgOC4xNzU3ODEtNDguMDU4NTk0IDIzLjQyOTY4OC02Ny4wNzgxMjYgMTQuOTE0MDYyLTE4LjY5MTQwNiAzNS42MDU0NjgtMzEuOTE0MDYyIDU4LjgzMjAzMS0zNy42MDE1NjJsLjAyMzQzNy0uMDAzOTA2YzMyLjExMzI4Mi03Ljc4NTE1NiA2Ni4wMTk1MzItLjQwNjI1IDkxLjk5MjE4OCAyMC4wMTE3MTggMjUuOTcyNjU2IDIwLjQyMTg3NiA0MS4xNDA2MjUgNTEuNjMyODEzIDQxLjE1MjM0NCA4NC42NzE4NzZ6bS0zNzAuNDgwNDY5LTkxLjY4MzU5NGMwLTUyLjY4NzUgNDIuNS05NS43NzczNDQgOTUuMTgzNTkzLTk1Ljc3NzM0NGgzNi43Njk1MzJjNDEuMzM1OTM3LjE3OTY4OCA3Ny45MDIzNDQgMjYuODIwMzEyIDkwLjc0NjA5NCA2Ni4xMDU0NjktMjMuNTcwMzEzIDcuODUxNTYyLTQ0LjM2MzI4MiAyMi4zNTkzNzUtNTkuODU5Mzc2IDQxLjc3NzM0My0xOC4wOTc2NTYgMjIuNjQ0NTMyLTI3LjkwMjM0MyA1MC44MDA3ODItMjcuNzg5MDYyIDc5Ljc4OTA2MyAwIDQuMzc1LjIyNjU2MiA4LjMyODEyNS42NzE4NzUgMTMuMzI4MTI1aC0xMzUuNzIyNjU2em0wIDAiLz48cGF0aCBkPSJtMTMzLjczMDQ2OSAwaC0uMTE3MTg4Yy0yMS42MjEwOTMuMDA3ODEyNS00Mi4zNTE1NjIgOC42MTMyODEtNTcuNjI1IDIzLjkxNzk2OS0xNS4yNzM0MzcgMTUuMzA4NTkzLTIzLjgzMjAzMSAzNi4wNTg1OTMtMjMuNzg5MDYyIDU3LjY4MzU5M3YuMTAxNTYzYy0uMDE5NTMxIDIxLjYwMTU2MyA4LjU2MjUgNDIuMzE2NDA2IDIzLjg1MTU2MiA1Ny41NzQyMTkgMTUuMjg5MDYzIDE1LjI1MzkwNiAzNi4wMjM0MzggMjMuNzkyOTY4IDU3LjYyMTA5NCAyMy43MjI2NTZoLjA4MjAzMWMyMS41OTc2NTYuMDU4NTk0IDQyLjMyODEyNS04LjQ4ODI4MSA1Ny42MDkzNzUtMjMuNzQ2MDk0IDE1LjI4NTE1Ny0xNS4yNjE3MTggMjMuODU5Mzc1LTM1Ljk3NjU2MiAyMy44MzU5MzgtNTcuNTc0MjE4di0uMTEzMjgyYy4wMzEyNS0yMS42MjUtOC41MzkwNjMtNDIuMzc1LTIzLjgyNDIxOS01Ny42NzU3ODEtMTUuMjgxMjUtMTUuMjk2ODc1LTM2LjAxOTUzMS0yMy44OTQ1MzEyNS01Ny42NDQ1MzEtMjMuODkwNjI1em03MS43NTc4MTIgODEuNTcwMzEyLTEwLS4xMTcxODdjLS4wNTQ2ODcgMzQuMDQ2ODc1LTI3LjY5NTMxMiA2MS41OTc2NTYtNjEuNzM4MjgxIDYxLjU0Njg3NWgtLjA1ODU5NGMtLjAwNzgxMiAwLS4wMTE3MTguMjI2NTYyLS4wMTk1MzEuMjI2NTYyLTIyLjEwOTM3NS4wOTM3NS00Mi41ODU5MzctMTEuNjQwNjI0LTUzLjY3NTc4MS0zMC43NzM0MzctMTEuMDg1OTM4LTE5LjEyODkwNi0xMS4wOTc2NTYtNDIuNzMwNDY5LS4wMjM0MzgtNjEuODY3MTg3IDExLjA3NDIxOS0xOS4xNDA2MjYgMzEuNTM5MDYzLTMwLjg5MDYyNiA1My42NTIzNDQtMzAuODEyNWwtLjAwMzkwNi05Ljk3MjY1Ny4xMDkzNzUgMTAuMDExNzE5YzM0LjA4NTkzNy4wNDI5NjkgNjEuNzEwOTM3IDI3LjY2NDA2MiA2MS43NTc4MTIgNjEuNzV6bTAgMCIvPjxwYXRoIGQ9Im0yNTIuMTk5MjE5IDMxN3YzNWgtMzVjLTUuNTIzNDM4IDAtMTAgNC40NzY1NjItMTAgMTB2MzZjMCA1LjUyMzQzOCA0LjQ3NjU2MiAxMCAxMCAxMGgzNXYzNWMwIDUuNTIzNDM4IDQuNDc2NTYyIDEwIDEwIDEwaDM2YzUuNTIzNDM3IDAgMTAtNC40NzY1NjIgMTAtMTB2LTM1aDM1YzUuNTIzNDM3IDAgMTAtNC40NzY1NjIgMTAtMTB2LTM2YzAtNS41MjM0MzgtNC40NzY1NjMtMTAtMTAtMTBoLTM1di0zNWMwLTUuNTIzNDM4LTQuNDc2NTYzLTEwLTEwLTEwaC0zNmMtNS41MjM0MzggMC0xMCA0LjQ3NjU2Mi0xMCAxMHptMjAgNDV2LTM1aDE2djM1YzAgNS41MjM0MzggNC40NzY1NjIgMTAgMTAgMTBoMzV2MTZoLTM1Yy01LjUyMzQzOCAwLTEwIDQuNDc2NTYyLTEwIDEwdjM1aC0xNnYtMzVjMC01LjUyMzQzOC00LjQ3NjU2My0xMC0xMC0xMGgtMzV2LTE2aDM1YzUuNTIzNDM3IDAgMTAtNC40NzY1NjIgMTAtMTB6bTAgMCIvPjwvZz48L3N2Zz4="  width='30px'/>
+    </button>
+    </th>
 
   </tr>
 </thead>
 <tbody id='tuser' >
 
 </tbody>
-
+</table>
       </div>
       <!-- The Modal user -->
 <div class="modal" id="ModalUsersE">
-  <div class="modal-dialog">
-    <div class="modal-content">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content " style='border-top-right-radius: 10px; border-top-left-radius: 10px;'>
 
       <!-- Modal Header -->
-      <div class="modal-header">
-        <h4 class="modal-title text-center">Editar Usuario</h4>
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      <div class="modal-header wrap-contact100 contact100-form-title " style='border-top-right-radius: 10px; border-top-left-radius: 10px; background-image: url(<?php echo base_url('img/bg-01.jpg')?>);'>
+      <button type="button" class="close pt-2 mt-0 text-light " data-dismiss="modal">&times;</button> 
+      <h2 class="modal-title text-center text-light ">Editar Usuario</h2>
       </div>
 
       <!-- Modal body -->
       <div id='modalU' class="modal-body">
           
       <form id='editarUserM' enctype='multipart/form-data'  method="post">
-      <label >Foto</label><br>
+      <label class='text-success  ' style='opacity: 0.8;'>Foto</label><br>
           <div class="  border-0" style="width: 8em;">
-            <img class="card-img-top" id='upfile1'src="<?php echo base_url('img/user.png')?>" width='1%' height='10%'>
+            <img class="card-img-top rounded-circle" id='upfile1'src="<?php echo base_url('img/user3.png')?>" width='1%' height='10%'>
             <div class="card-body">
-                    <input type="file" class="form-control-file" name="imgU" id="imgU" hidden>
+                    <input type="file" class="form-control-file" name="imgU"   id="imgU" hidden>
                     
             </div>
          </div>
-           <label >Nombre</label><br>
-          <input class=' border-0 text-center' type="text" name='nombre' id='Nommue' style='width:250px'><hr class='mt-0 pt-0' style='width:250px'><br>
-          <label >Alias</label><br>
-          <input class=' border-0 text-center mb-0 pb-0' type="text" name='alias' id='Alimue'><hr class='mt-0 pt-0' style='width:120px'><br>
-          <label >Correo</label><br>
-          <input class=' border-0 text-center mb-0 pb-0' type="text" name='correo' id='Corrmue'><hr class='mt-0 pt-0' style='width:120px'><br>
-          <input class=' border-0 text-center mb-0 pb-0' type="text" name='id' id='idmue' hidden>
-           
+
+         <div class=' ml-6 pl-5 pr-0 mr-0 pt-4'style='display: flex; height: 10em; flex-wrap: wrap; align-content: center; width:650px'>
+              <div class='pr-5'>
+                <label class='text-success '  style='opacity: 0.8;'>Nombre</label><br>
+                <input class=' border-0 text-center' type="text" name='nombre' id='Nommue' style='width:250px'>
+                <hr class='mt-0 pt-0' style='width:250px'><br>
+              </div>
+
+              <div class='pl-5'>
+                <label class='text-success  ' style='opacity: 0.8;'>Alias</label><br>
+                <input class=' border-0 text-center mb-0 pb-0' type="text" name='alias' id='Alimue'>
+                <hr class='mt-0 pt-0' style='width:120px'><br>
+              </div>
+              <div class='pr-5'>
+                <label class='text-success  ' style='opacity: 0.8;'>Correo</label><br>
+                <input class=' border-0 text-center mb-0 pb-0' type="text" name='correo' id='Corrmue'><hr class='mt-0 pt-0' style='width:250px'><br>
+                <input class=' border-0 text-center mb-0 pb-0' type="text" name='id' id='idmue' hidden>
+              </div>
+              <div class='pl-5'>
+                <label class='text-success  ' style='opacity: 0.8;'>Clave</label><br>
+                <input class=' border-0 text-center mb-0 pb-0' placeholder='*****' type="password" name='cve' id='cve'>
+                <hr class='mt-0 pt-0' style='width:200px'><br>
+              </div>
+        </div>
 
           </form>
           <!-- <label >Menu</label><br>
@@ -343,7 +377,7 @@
       </div>
 
       <!-- Modal footer -->
-      <div class="modal-footer">
+      <div class="modal-footer border-0">
         <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
         <button type="button" class="btn btn-success" data-dismiss="modal" onclick='editUser()' >Guardar</button>
       </div>
@@ -353,6 +387,8 @@
 </div>
 
 <script>
+ 
+   
   function userclick2() {
 	let padre = this.parentNode;
 	let hijo = padre.childNodes[1];
@@ -367,6 +403,7 @@
 	document.getElementById("Alimue").value = alias;
 	document.getElementById("idmue").value = id;
 	document.getElementById("Corrmue").value = correo;
+	document.getElementById("upfile1").setAttribute('src',padre.childNodes[0].childNodes[0].src)
 
 	console.log(" click 2  -> id " + id + " nom " + nombre + " alias " + alias);
   $("#ModalUsersE").modal("show");
@@ -498,48 +535,116 @@ $(document).ready(function() {
    
  }
 </script>
+<style>
+   .contact100-form-title {
+    width: 100%;
+    position: relative;
+    z-index: 1;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    align-items: center;
+  
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+  
+    padding: 0px 15px 40px 15px;
+  }
+  .contact100-form-title::before {
+  content: "";
+  display: block;
+  position: absolute;
+  border-top-right-radius: 10px;
+   border-top-left-radius: 10px;
+  z-index: -1;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background-color: rgba(54,84,99,0.7);
+}
+wrap-contact100 {
+  width: 670px;
+  background: #fff;
+  border-radius: 10px;
+  overflow: hidden;
+  position: relative;
+}
+</style>
       <!-- The Modal user Agrega -->
 <div class="modal" id="ModalUsersA">
-  <div class="modal-dialog">
-    <div class="modal-content">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content" style='border-top-right-radius: 10px; border-top-left-radius: 10px;'>
 
       <!-- Modal Header -->
-      <div class="modal-header">
-        <h4 class="modal-title text-center">Agregar Usuario</h4>
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      <div class="modal-header wrap-contact100 contact100-form-title " style="border-top-right-radius: 10px; border-top-left-radius: 10px; background-image: url(<?php echo base_url('img/bg-01.jpg')?>);">
+      <button type="button" class="close pt-2 mt-0 text-light " data-dismiss="modal">&times;</button> 
+      <h2 class="modal-title text-center text-light ">Agregar Usuario</h2>
       </div>
 
       <!-- Modal body -->
-      <div id='modalU' class="modal-body">
+      <div id='modalU' class="modal-body pl-0 pr-0">
           
-          <form id='agregaUser' enctype='multipart/form-data'  method="post">
-          <label >Foto</label><br>
-          <div class="  border-0" style="width: 8em;">
-            <img class="card-img-top" id='upfile1'src="<?php echo base_url('img/user.png')?>" width='1%' height='10%'>
+          <form id='agregaUser' class='d-flex justify-content-evenly' enctype='multipart/form-data'  method="post">
+          <label  class='text-info  ' style='opacity: 0.8;' >Foto</label><br>
+          <div class="  border-0 float-md-start pl-0" style="width: 8em;">
+            <img class="card-img-top" id='upfile11'src="<?php echo base_url('img/user3.png')?>" width='1%' height='10%'>
             <div class="card-body">
-                    <input type="file" class="form-control-file" name="imgU" id="imgU" hidden>
-                    
+                    <input type="file" class="form-control-file" name="imgU"  id="imgU" style="width: 16em;"hidden>      
             </div>
+            
          </div>
+         <script>
+              $("#upfile11").click(function () {
+                $("#imgU").trigger('click');
+            }); 
+              $("#upfile1").click(function () {
+                $("#imgU").trigger('click');
+            }); 
+            </script>
 
-         <script>$("#upfile1").click(function () {
-    $("#imgU").trigger('click');
-});</script>
-          <label >Nombre</label><br>
-          <input class=' border-0 text-center' type="text" name='nombre' id='nombreI' style='width:250px'><hr class='mt-0 pt-0' style='width:250px'><br>
-          <label >Alias</label><br>
-          <input class=' border-0 text-center' type="text" name='alias' id='aliasI' style='width:250px'><hr class='mt-0 pt-0' style='width:250px'><br>
-          <label >Correo</label><br>
-          <input class=' border-0 text-center' type="email" name='correo' id='correoI' style='width:250px'><hr class='mt-0 pt-0' style='width:250px'><br>
-          <label >Clave</label><br>
-          <input class=' border-0 text-center' type="password" name='clave' id='claveI' style='width:250px'><hr class='mt-0 pt-0' style='width:250px'><br>
-          
+   
+              <div class=' ml-6 pl-5 pr-0 mr-0 pt-4'style='display: flex; height: 10em; flex-wrap: wrap; align-content: center; width:650px'>
+              
+                  
+                        <div class='pr-5'>
+                        <label  class='text-info  ' style='opacity: 0.8;'  >Nombre</label><br>
+                        <input class=' border-0 text-center pl-0' type="text" name='nombre' id='nombreI' style='width:250px'>
+                        <hr class='mt-0 pt-0 pl-0' style='width:250px'>
+                        </div>
+
+                        <div class='pl-5'>
+                        <label  class='text-info  ' style='opacity: 0.8;' >Alias</label><br>
+                        <input class=' border-0 text-center' type="text" name='alias' id='aliasI' style='width:250px'>
+                        <hr class='mt-0 pt-0' style='width:250px'>
+                        </div>
+ 
+                        <div class='pr-5 pt-4'>
+                        <label  class='text-info  ' style='opacity: 0.8;' >Correo</label><br>
+                        <input class=' border-0 text-center' type="email" name='correo' id='correoI' style='width:250px'>
+                        <hr class='mt-0 pt-0' style='width:250px'>
+                        </div>
+
+                        <div class='pl-5 pt-4'>
+                        <label  class='text-info  'style='opacity: 0.8;' >Clave</label><br>
+                        <input class=' border-0 text-center' type="password"   name='clave' id='claveI' style='width:250px'>
+                        <hr class='mt-0 pt-0' style='width:250px'> 
+                        </div>
+                        
+              </div>
+        
+           
           </form>
           
       </div>
 
       <!-- Modal footer -->
-      <div class="modal-footer">
+      <div class="modal-footer border-0">
         <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
         <button type="button" class="btn btn-success" data-dismiss="modal" onclick='agregarUser()' >Guardar</button>
       </div>
@@ -547,6 +652,8 @@ $(document).ready(function() {
     </div>
   </div>
 </div>
+
+
       
  <!-- The Modal -->
  <div class="modal fade" id="ModalEliminaU">
