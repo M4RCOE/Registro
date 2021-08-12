@@ -38,6 +38,7 @@ function agrega() {
 	let span2 = document.createElement("span");
 	span.innerHTML = url;
 	span2.innerHTML = 'fas fa-home';
+	span2.setAttribute('hidden',true)
 	span.className = "text-muted";
 	span.style = "font-size: 12px";
 	div.innerHTML = txturl;
@@ -49,6 +50,8 @@ function agrega() {
 	li.appendChild(div);
 
 	contenedor.appendChild(li);
+	document.getElementById("url").value='';
+	document.getElementById("textoUrl").value='';
 }
 function menuclick() {
 	document.getElementById("up").removeAttribute("hidden");
@@ -425,16 +428,14 @@ function poneMenu(user) {
 
 				if (r2[i].Nivel == 0) {
 					  
-						
-						if(i!=r2.length){
+						if(i!=r2.length-1){
 							console.log(r2[i].Menu)
 							console.log(r2[i+1].Menu)
 							console.log(i+1)
-							if(r2.length!=1 && r2[i+1].Nivel != 0){
+							if(r2.length!=1 && r2[i+1].Nivel == 1){
 								p.appendChild(ic2)
 							}
-						}
-						
+						}	
 					
 					contenedor.appendChild(li);
 				} else if (r2[i].Nivel == 1) {
@@ -445,24 +446,47 @@ function poneMenu(user) {
 						c.appendChild(li);
 					} else {
 						console.log("agrega UL");
-
+						if(i!=r2.length-1){
+							console.log(r2[i].Menu)
+							console.log(r2[i+1].Menu)
+							console.log(i+1)
+							if(r2.length!=1 && r2[i+1].Nivel == 2){
+								p.appendChild(ic2)
+							}
+						}	
 						ul.appendChild(li);
 						c.appendChild(ul);
 					}
 				} else if (r2[i].Nivel == 2) {
 					c = contenedor.lastChild;
-
 					c2 = c.lastChild;
-					ol.appendChild(li);
-
-					c2.appendChild(ol);
+					if (c2.tagName == "UL") {
+						c2.appendChild(li);
+					} else {
+						console.log("agrega UL");
+						if(i!=r2.length-1){
+							console.log(r2[i].Menu)
+							console.log(r2[i+1].Menu)
+							console.log(i+1)
+							if(r2.length!=1 && r2[i+1].Nivel == 3){
+								p.appendChild(ic2)
+							}
+						}	
+						ul.appendChild(li);
+						c2.appendChild(ul);
+					}
 				} else if (r2[i].Nivel == 3) {
 					c = contenedor.lastChild;
 					c2 = c.lastChild;
 					c3 = c2.lastChild;
-					ol.appendChild(li);
+					if (c3.tagName == "UL") {
+						c3.appendChild(li);
+					} else {
+						console.log("agrega UL");
 
-					c3.appendChild(ol);
+						ul.appendChild(li);
+						c3.appendChild(ul);
+					}
 				} else if (r2[i].Nivel == 4) {
 					c = contenedor.lastChild;
 					c2 = c.lastChild;

@@ -226,9 +226,9 @@ function poneMenu(user) {
 		type: "POST",
 		success: function (r) {
 			r2 = JSON.parse(r);
-			console.log( r2);
+			console.log(r2);
 			contenedor = document.getElementById("menusUser");
-			contenedor.innerHTML = "";
+				contenedor.innerHTML = "";
 			for (i = 0; i < r2.length; i++) {
 				let li = document.createElement("li");
 				let ul = document.createElement("ul");
@@ -236,55 +236,83 @@ function poneMenu(user) {
 				let p = document.createElement("p");
 				let ic = document.createElement("i");
 				let ic2 = document.createElement("i");
-				 ic2.className='fas fa-angle-down '
+				ic2.className='fas fa-angle-down float-end'
+
 				ic.className = r2[i].Icono;
-				 
 				ul.className = "nav nav-treeview";
 				ul.setAttribute("style", "display: none;");
 				a.setAttribute("href", r2[i].Enlace);
 				a.setAttribute("target", "_blank");
 				a.className = "nav-link";
-				a.appendChild(ic)
-				p.innerHTML = r2[i].Menu+"  ";
-				p.className='pl-2'
+				a.style.width='200px';
+				p.innerHTML = r2[i].Menu +"  ";
+				p.className = "pl-2";
 				li.className = "nav-item";
-				
+				a.appendChild(ic);
 				a.appendChild(p);
 				li.appendChild(a);
-				
+
 				if (r2[i].Nivel == 0) {
-					if(r2.length!=1 && r2[i+1].Nivel != 0){
-					p.appendChild(ic2)
-					}
+					  
+						if(i!=r2.length-1){
+							console.log(r2[i].Menu)
+							console.log(r2[i+1].Menu)
+							console.log(i+1)
+							if(r2.length!=1 && r2[i+1].Nivel == 1){
+								p.appendChild(ic2)
+							}
+						}	
 					
 					contenedor.appendChild(li);
 				} else if (r2[i].Nivel == 1) {
 					c = contenedor.lastChild;
-				 
+					console.log(c);
+					console.log(r2[i].Menu + " " + c.tagName);
 					if (c.tagName == "UL") {
 						c.appendChild(li);
 					} else {
-						 
-							ul.appendChild(li);
-							c.appendChild(ul);
-					 
-					
-						
+						console.log("agrega UL");
+						if(i!=r2.length-1){
+							console.log(r2[i].Menu)
+							console.log(r2[i+1].Menu)
+							console.log(i+1)
+							if(r2.length!=1 && r2[i+1].Nivel ==2){
+								p.appendChild(ic2)
+							}
+						}	
+						ul.appendChild(li);
+						c.appendChild(ul);
 					}
 				} else if (r2[i].Nivel == 2) {
 					c = contenedor.lastChild;
-
 					c2 = c.lastChild;
-					ol.appendChild(li);
-
-					c2.appendChild(ol);
+					if (c2.tagName == "UL") {
+						c2.appendChild(li);
+					} else {
+						console.log("agrega UL");
+						if(i!=r2.length-1){
+							console.log(r2[i].Menu)
+							console.log(r2[i+1].Menu)
+							console.log(i+1)
+							if(r2.length!=1 && r2[i+1].Nivel == 3){
+								p.appendChild(ic2)
+							}
+						}	
+						ul.appendChild(li);
+						c2.appendChild(ul);
+					}
 				} else if (r2[i].Nivel == 3) {
 					c = contenedor.lastChild;
 					c2 = c.lastChild;
 					c3 = c2.lastChild;
-					ol.appendChild(li);
+					if (c3.tagName == "UL") {
+						c3.appendChild(li);
+					} else {
+						console.log("agrega UL");
 
-					c3.appendChild(ol);
+						ul.appendChild(li);
+						c3.appendChild(ul);
+					}
 				} else if (r2[i].Nivel == 4) {
 					c = contenedor.lastChild;
 					c2 = c.lastChild;
