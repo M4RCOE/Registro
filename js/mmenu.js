@@ -432,7 +432,7 @@ function poneMenu(user) {
 							console.log(r2[i].Menu)
 							console.log(r2[i+1].Menu)
 							console.log(i+1)
-							if(r2.length!=1 && r2[i+1].Nivel == 1){
+							if(r2.length!=1 && r2[i+1].Nivel != 0){
 								p.appendChild(ic2)
 							}
 						}	
@@ -450,7 +450,7 @@ function poneMenu(user) {
 							console.log(r2[i].Menu)
 							console.log(r2[i+1].Menu)
 							console.log(i+1)
-							if(r2.length!=1 && r2[i+1].Nivel == 2){
+							if(r2.length!=1 && r2[i+1].Nivel != 1){
 								p.appendChild(ic2)
 							}
 						}	
@@ -468,7 +468,7 @@ function poneMenu(user) {
 							console.log(r2[i].Menu)
 							console.log(r2[i+1].Menu)
 							console.log(i+1)
-							if(r2.length!=1 && r2[i+1].Nivel == 3){
+							if(r2.length!=1 && r2[i+1].Nivel != 2){
 								p.appendChild(ic2)
 							}
 						}	

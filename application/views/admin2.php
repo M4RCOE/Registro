@@ -428,9 +428,9 @@ $(document).ready(function() {
 } );
   cargaUser()
   function cargaUser() {
-	 
+    let sis=document.getElementById('sitioURL').value
    $.ajax({
-     url: "http://localhost:82/residencia/php/users.php",
+     url: sis+"php/users.php",
      success: function (r) {
        t = document.getElementById("tuser");
     
@@ -464,7 +464,7 @@ $(document).ready(function() {
          img2.setAttribute("src","data:image/svg+xml;base64,PHN2ZyBoZWlnaHQ9IjQ2N3B0IiB2aWV3Qm94PSItNjAgMCA0NjcgNDY3LjAwMDYxIiB3aWR0aD0iNDY3cHQiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHBhdGggZD0ibTMzNi4zOTg0MzggOTIuODAwNzgxdjU2aC0zMjYuMzk4NDM4di01NmMwLTE2LjU3MDMxMiAxMy40MzM1OTQtMzAgMzAtMzBoMjY2LjM5ODQzOGMxNi41NzAzMTIgMCAzMCAxMy40Mjk2ODggMzAgMzB6bTAgMCIgZmlsbD0iIzAwZWZkMSIvPjxwYXRoIGQ9Im0zMDcuODAwNzgxIDE0OS4xOTkyMTl2MjY0LjgwMDc4MWMwIDI1LjA4OTg0NC0xNy45MTAxNTYgNDMtNDAgNDNoLTE4OS4xOTkyMTljLTIyLjA4OTg0MyAwLTQwLTE3LjkxMDE1Ni00MC00M3YtMjY1LjE5OTIxOWgyNjkuMTk5MjE5em0wIDAiIGZpbGw9IiMwMGFjZWEiLz48ZyBmaWxsPSIjMDgzODYzIj48cGF0aCBkPSJtMjMyLjYwMTU2MiA0MDQuMTk5MjE5YzUuNTIzNDM4IDAgMTAtNC40NzY1NjMgMTAtMTB2LTE5OWMwLTUuNTIzNDM4LTQuNDc2NTYyLTEwLTEwLTEwLTUuNTIzNDM3IDAtMTAgNC40NzY1NjItMTAgMTB2MTk5YzAgNS41MjM0MzcgNC40NzY1NjMgMTAgMTAgMTB6bTAgMCIvPjxwYXRoIGQ9Im0xMTMuODAwNzgxIDQwNC4xOTkyMTljNS41MjM0MzggMCAxMC00LjQ3NjU2MyAxMC0xMHYtMTk5YzAtNS41MjM0MzgtNC40NzY1NjItMTAtMTAtMTAtNS41MjM0MzcgMC0xMCA0LjQ3NjU2Mi0xMCAxMHYxOTljMCA1LjUyMzQzNyA0LjQ3NjU2MyAxMCAxMCAxMHptMCAwIi8+PHBhdGggZD0ibTMwNi4zOTg0MzggNTIuODAwNzgxaC00OC43OTY4NzZ2LTEyLjgwMDc4MWMtLjAyNzM0My0yMi4wODIwMzEtMTcuOTIxODc0LTM5Ljk3NjU2MjUtNDAtNDBoLTg4LjgwMDc4MWMtMjIuMDgyMDMxLjAyMzQzNzUtMzkuOTc2NTYyIDE3LjkxNzk2OS00MCA0MHYxMi44MDA3ODFoLTQ4LjgwMDc4MWMtMjIuMDgyMDMxLjAyMzQzOC0zOS45NzY1NjI1IDE3LjkxNzk2OS00MCA0MHY1NmMwIDUuNTIzNDM4IDQuNDc2NTYyIDEwIDEwIDEwaDE4LjYwMTU2MnYyNTUuMTk5MjE5YzAgMTQuNTYyNSA1LjEzNjcxOSAyNy45ODQzNzUgMTQuNDY4NzUgMzcuODAwNzgxIDkuMjMwNDY5IDkuNzYxNzE5IDIyLjA5Mzc1IDE1LjI2NTYyNSAzNS41MzEyNSAxNS4xOTkyMTloMTg5LjE5OTIxOWMxMy40Mzc1LjA2NjQwNiAyNi4zMDA3ODEtNS40Mzc1IDM1LjUzMTI1LTE1LjE5OTIxOSA5LjMzMjAzMS05LjgxMjUgMTQuNDY4NzUtMjMuMjM4MjgxIDE0LjQ2ODc1LTM3LjgwMDc4MXYtMjU1LjE5OTIxOWgxOC41OTc2NTdjNS41MjM0MzcgMCAxMC00LjQ3NjU2MiAxMC0xMHYtNTZjLS4wMjM0MzgtMjIuMDgyMDMxLTE3LjkxNzk2OS0zOS45NzY1NjItNDAtNDB6bS0xOTcuNTk3NjU3LTEyLjgwMDc4MWMuMDExNzE5LTExLjAzOTA2MiA4Ljk2MDkzOC0xOS45ODgyODEgMjAtMjBoODguODAwNzgxYzExLjAzOTA2My4wMTE3MTkgMTkuOTg0Mzc2IDguOTYwOTM4IDIwIDIwdjEyLjgwMDc4MWgtMTI4LjgwMDc4MXptMTg5IDM3NGMwIDE4LjgxMjUtMTIuOTAyMzQzIDMzLTMwIDMzaC0xODkuMTk5MjE5Yy0xNy4xMDE1NjIgMC0zMC0xNC4xODc1LTMwLTMzdi0yNTUuMTk5MjE5aDI0OS4xOTkyMTl6bTI4LjU5NzY1Ny0yNzUuMTk5MjE5aC0zMDYuMzk4NDM4di00NmMuMDExNzE5LTExLjA0Mjk2OSA4Ljk2MDkzOC0xOS45ODgyODEgMjAtMjBoMjY2LjM5ODQzOGMxMS4wNDI5NjguMDExNzE5IDE5Ljk4ODI4MSA4Ljk1NzAzMSAyMCAyMHptMCAwIi8+PC9nPjwvc3ZnPg==")
          img2.setAttribute("width","22px")
            
-         img3.setAttribute("src","http://localhost:82/residencia/"+r2[i].img_user)
+         img3.setAttribute("src",sis+""+r2[i].img_user)
          img3.setAttribute("width","35px")
          img3.className="rounded-circle "
 
@@ -502,7 +502,7 @@ $(document).ready(function() {
         
          let nomTem=r2[i].nomCom
          $.ajax({
-          url: "http://localhost:82/residencia/php/consulta.php",
+          url: sis+"php/consulta.php",
           success: function (r) {
             r3 = JSON.parse(r);
             contenedor = document.getElementById("MenuFV");
